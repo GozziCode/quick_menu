@@ -1,6 +1,6 @@
-# quick_menu
+# Quick Menu
 
-A new Flutter project.
+HNG Stage V
 
 ## Getting Started
 
