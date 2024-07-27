@@ -38,6 +38,7 @@ dependencies:
   flutter_nfc_kit: ^3.5.2
   provider: ^6.1.2
   ndef: ^0.3.3
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:

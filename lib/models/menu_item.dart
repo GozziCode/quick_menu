@@ -1,9 +1,9 @@
-
+// lib/menu_item.dart
 class MenuItem {
-  final String name;
-  final String imageUrl;
-  final String description;
-  final double price;
+  String name;
+  String imageUrl; // URL to the image
+  String description;
+  double price;
   bool isAvailable;
 
   MenuItem({
@@ -11,22 +11,26 @@ class MenuItem {
     required this.imageUrl,
     required this.description,
     required this.price,
-    this.isAvailable = true,
+    required this.isAvailable,
   });
 
-  Map<String, dynamic> toJson() => {
-    'name': name,
-    'imageUrl': imageUrl,
-    'description': description,
-    'price': price,
-    'isAvailable': isAvailable,
-  };
+  factory MenuItem.fromJson(Map<String, dynamic> json) {
+    return MenuItem(
+      name: json['name'],
+      imageUrl: json['imageUrl'],
+      description: json['description'],
+      price: json['price'].toDouble(),
+      isAvailable: json['isAvailable'],
+    );
+  }
 
-  static MenuItem fromJson(Map<String, dynamic> json) => MenuItem(
-    name: json['name'],
-    imageUrl: json['imageUrl'],
-    description: json['description'],
-    price: json['price'],
-    isAvailable: json['isAvailable'],
-  );
+  Map<String, dynamic> toJson() {
+    return {
+      'name': name,
+      'imageUrl': imageUrl,
+      'description': description,
+      'price': price,
+      'isAvailable': isAvailable,
+    };
+  }
 }

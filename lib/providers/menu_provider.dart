@@ -21,4 +21,11 @@ class MenuProvider with ChangeNotifier {
     _menuItems.add(item);
     notifyListeners();
   }
+
+   void updateMenuItemAvailability(int index, bool isAvailable) {
+    if (index >= 0 && index < _menuItems.length) {
+      _menuItems[index].isAvailable = isAvailable;
+      notifyListeners();
+    }
+  }
 }

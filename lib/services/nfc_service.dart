@@ -1,4 +1,3 @@
-// lib/nfc_service.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
 import 'package:ndef/ndef.dart' as ndef;
@@ -14,7 +13,10 @@ class NfcService {
     try {
       var availability = await FlutterNfcKit.nfcAvailability;
       if (availability != NFCAvailability.available) {
-        throw Exception('NFC is not available');
+        if (context.mounted) {
+          _showErrorDialog(context, 'NFC is not available');
+        }
+        return;
       }
 
       var tag = await FlutterNfcKit.poll(timeout: const Duration(seconds: 10));
@@ -32,18 +34,31 @@ class NfcService {
                   .setMenuItems(menuItems);
             }
           } else {
-            throw Exception('NDEF record payload is null');
+            if (context.mounted) {
+              _showErrorDialog(context, 'NDEF record payload is null');
+            }
           }
+        } else {
+          if (context.mounted) {
+            _showErrorDialog(context, 'No NDEF records found');
+          }
+        }
+      } else {
+        if (context.mounted) {
+          _showErrorDialog(context, 'NDEF is not available on this tag');
         }
       }
     } catch (e) {
-      debugPrint('Error reading NFC tag: $e');
+      if (context.mounted) {
+        _showErrorDialog(context, 'Error reading NFC tag: $e');
+      }
     } finally {
       await FlutterNfcKit.finish();
     }
   }
 
-  static Future<void> writeNfc(List<MenuItem> menuItems) async {
+  static Future<void> writeNfc(
+      BuildContext context, List<MenuItem> menuItems) async {
     var message = [
       ndef.TextRecord(
         text: json.encode(menuItems.map((e) => e.toJson()).toList()),
@@ -53,17 +68,74 @@ class NfcService {
     try {
       var availability = await FlutterNfcKit.nfcAvailability;
       if (availability != NFCAvailability.available) {
-        throw Exception('NFC is not available');
+        if (context.mounted) {
+          _showErrorDialog(context, 'NFC is not available');
+        }
+        return;
       }
 
       var tag = await FlutterNfcKit.poll(timeout: const Duration(seconds: 10));
       if (tag.ndefWritable == true) {
         await FlutterNfcKit.writeNDEFRecords(message);
+        if (context.mounted) {
+          _showSuccessDialog(
+              context, 'Menu items successfully written to NFC tag!');
+        }
+      } else {
+        if (context.mounted) {
+          _showErrorDialog(context, 'NDEF is not writable on this tag');
+        }
       }
     } catch (e) {
-      print('Error writing NFC tag: $e');
+      if (context.mounted) {
+        _showErrorDialog(context, 'Error writing NFC tag: $e');
+      }
     } finally {
       await FlutterNfcKit.finish();
+    }
+  }
+
+  static void _showErrorDialog(BuildContext context, String message) {
+    if (context.mounted) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Error'),
+            content: Text(message),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  static void _showSuccessDialog(BuildContext context, String message) {
+    if (context.mounted) {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text('Success'),
+            content: Text(message),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
     }
   }
 }
