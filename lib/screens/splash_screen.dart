@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../constant/app_color.dart';
+import '../onboarding/page1.dart';
 import 'write_screen.dart';
 
 class SplashScreeen extends StatefulWidget {
@@ -18,7 +19,7 @@ class _SplashScreeenState extends State<SplashScreeen> {
     Timer(const Duration(seconds: 5), () {
       Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (c) => const WriteScreen()
+          MaterialPageRoute(builder: (c) => const EnableNfc()
               // const StartScreen()
               ));
     });
@@ -35,7 +36,7 @@ class _SplashScreeenState extends State<SplashScreeen> {
     // final double textScaleFactor = MediaQuery.textScalerOf(context).scale(1.5);
 
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
             image: AssetImage("assets/Splash_Screen.png"), fit: BoxFit.cover),
       ),
@@ -54,17 +55,20 @@ class _SplashScreeenState extends State<SplashScreeen> {
                     width: 181.33,
                     child: Image.asset('assets/Group.png'),
                   ),
-                  SizedBox(height: 5),
+                  const SizedBox(height: 5),
                   Container(
-                      height: 27,
-                      width: 196,
-                      child: Text("Kimiko's Place",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.inter(
-                            fontSize: 27,
-                            fontWeight: FontWeight.w800,
-                            color: Color.fromRGBO(255, 255, 255, 1),
-                          ))),
+                    height: 27,
+                    width: 196,
+                    child: Text(
+                      "Kimiko's Place",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.inter(
+                        fontSize: 27,
+                        fontWeight: FontWeight.w800,
+                        color: const Color.fromRGBO(255, 255, 255, 1),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
