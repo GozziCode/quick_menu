@@ -18,24 +18,24 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => MenuProvider()),
-        
       ],
       child: ScreenUtilInit(
-          designSize: const Size(428, 930),
-          minTextAdapt: true,
-          splitScreenMode: true,
-          builder: (_, child) {
-            return MaterialApp(
-              title: 'Quick Menu',
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                colorScheme:
-                    ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
-                useMaterial3: true,
-              ),
-              home: const SplashScreeen(),
-            );
-          }),
+        designSize: const Size(430, 932),
+        minTextAdapt: true,
+        splitScreenMode: true,
+        builder: (_, child) {
+          return MaterialApp(
+            title: 'Quick Menu',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              colorScheme:
+                  ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
+              useMaterial3: true,
+            ),
+            home: const SplashScreeen(),
+          );
+        },
+      ),
     );
   }
 }
