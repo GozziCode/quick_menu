@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../constant/app_color.dart';
 import 'write_screen.dart';
@@ -33,16 +34,42 @@ class _SplashScreeenState extends State<SplashScreeen> {
   Widget build(BuildContext context) {
     // final double textScaleFactor = MediaQuery.textScalerOf(context).scale(1.5);
 
-    return Scaffold(
-      backgroundColor: AppColors.bgColor,
-      appBar: AppBar(
-        backgroundColor: AppColors.bgColor,
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage("assets/Splash_Screen.png"), fit: BoxFit.cover),
       ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text('Quick Menu')],
-        ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Stack(children: [
+          Align(
+            alignment: Alignment.topCenter,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 212.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 123.63,
+                    width: 181.33,
+                    child: Image.asset('assets/Group.png'),
+                  ),
+                  SizedBox(height: 5),
+                  Container(
+                      height: 27,
+                      width: 196,
+                      child: Text("Kimiko's Place",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.inter(
+                            fontSize: 27,
+                            fontWeight: FontWeight.w800,
+                            color: Color.fromRGBO(255, 255, 255, 1),
+                          ))),
+                ],
+              ),
+            ),
+          ),
+        ]),
       ),
     );
   }
