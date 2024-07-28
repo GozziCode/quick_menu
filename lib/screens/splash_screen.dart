@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../constant/app_color.dart';
+import '../onboarding/onboarding_screen.dart';
 import '../onboarding/page1.dart';
 import 'write_screen.dart';
 
@@ -19,7 +20,7 @@ class _SplashScreeenState extends State<SplashScreeen> {
     Timer(const Duration(seconds: 5), () {
       Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (c) => const EnableNfc()
+          MaterialPageRoute(builder: (c) => const OnBoardingScreen()
               // const StartScreen()
               ));
     });
