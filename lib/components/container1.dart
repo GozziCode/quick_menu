@@ -19,9 +19,9 @@ class MyContainer1 extends StatelessWidget {
           height: 48,
           width: 381,
           decoration: BoxDecoration(
-            color: Color.fromRGBO(252, 171, 16, 1),
+            color: const Color.fromRGBO(252, 171, 16, 1),
             borderRadius: BorderRadius.circular(8),
-            border: Border(
+            border: const Border(
               top: BorderSide(
                 width: 1.0,
                 color: Color.fromRGBO(239, 239, 239, 1),
@@ -41,12 +41,12 @@ class MyContainer1 extends StatelessWidget {
                     height: 19.6 / 16,
                   ),
                 ),
-                SizedBox(width: 10),
-                Container(
+                const SizedBox(width: 10),
+                const SizedBox(
                   height: 20,
                   width: 20,
                   child: Icon(Icons.arrow_forward_outlined,
-                      color: const Color.fromRGBO(239, 239, 239, 1)),
+                      color: Color.fromRGBO(239, 239, 239, 1)),
                 ),
               ],
             ),
@@ -75,7 +75,7 @@ class MyContainer2 extends StatelessWidget {
           height: 48,
           width: 381,
           decoration: BoxDecoration(
-            color: Color.fromRGBO(252, 171, 16, 1),
+            color: const Color.fromRGBO(252, 171, 16, 1),
             borderRadius: BorderRadius.circular(8),
             border: const Border(
               top: BorderSide(
@@ -98,10 +98,10 @@ class MyContainer2 extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 10),
-                Container(
+                const SizedBox(
                   height: 20,
                   width: 20,
-                  child: const Icon(Icons.camera_alt_outlined,
+                  child: Icon(Icons.camera_alt_outlined,
                       color: Color.fromRGBO(239, 239, 239, 1)),
                 ),
               ],

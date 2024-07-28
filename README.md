@@ -67,7 +67,7 @@ Quick Menu is a resturant menu mobile app that transform the dinning experience 
 
 - Flutter and Dart
 
-### What I learnt
+### Lesson learnt
 
 Developing the Quick Menu app provided several valuable insights and lessons, both technical and non-technical, these lessons are summarized in the following bullet point:
 
@@ -169,7 +169,7 @@ Download [here](/gitfiles/malltiverse.apk)
 
 Try Quick Menu Demo: [Appitize.io](https:)
 
-## Authors
+## Author
 
 - Uma Godwin, Spicy, Wisdom
 

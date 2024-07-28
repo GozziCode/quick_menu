@@ -3,10 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../constant/app_color.dart';
 import '../onboarding/onboarding_screen.dart';
-import '../onboarding/page1.dart';
-import 'write_screen.dart';
 
 class SplashScreeen extends StatefulWidget {
   const SplashScreeen({super.key});
@@ -19,10 +16,7 @@ class _SplashScreeenState extends State<SplashScreeen> {
   startTimer() async {
     Timer(const Duration(seconds: 5), () {
       Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (c) => const OnBoardingScreen()
-              // const StartScreen()
-              ));
+          context, MaterialPageRoute(builder: (c) => const OnBoardingScreen()));
     });
   }
 
@@ -51,13 +45,13 @@ class _SplashScreeenState extends State<SplashScreeen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                     height: 123.63,
                     width: 181.33,
                     child: Image.asset('assets/Group.png'),
                   ),
                   const SizedBox(height: 5),
-                  Container(
+                  SizedBox(
                     height: 27,
                     width: 196,
                     child: Text(

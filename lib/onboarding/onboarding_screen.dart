@@ -13,7 +13,7 @@ class OnBoardingScreen extends StatefulWidget {
 }
 
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
-  PageController _controller = PageController();
+  final PageController _controller = PageController();
 
   bool onPage3 = false;
 
@@ -41,8 +41,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           bottom: 30,
           child: Column(
             children: [
-              Text('Back'),
-              SizedBox(height: 32),
+              const Text('Back'),
+              const SizedBox(height: 32),
               SmoothPageIndicator(
                 controller: _controller,
                 count: 3,
