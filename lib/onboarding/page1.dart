@@ -66,3 +66,4 @@ class EnableNfcScreen extends StatelessWidget {
     );
   }
 }
+

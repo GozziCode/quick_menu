@@ -1,9 +1,14 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:quick_menu/onboarding/onboarding.dart';
 
-import '../onboarding/onboarding_screen.dart';
+import '../constant/app_color.dart';
+import '../onboarding/onbd.dart';
+import 'enable_nfc_screen.dart';
+import 'write_screen.dart';
 
 class SplashScreeen extends StatefulWidget {
   const SplashScreeen({super.key});
@@ -16,7 +21,14 @@ class _SplashScreeenState extends State<SplashScreeen> {
   startTimer() async {
     Timer(const Duration(seconds: 5), () {
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (c) => const OnBoardingScreen()));
+          context,
+          MaterialPageRoute(
+            builder: (c) =>const MyOnboarding(),
+                //const WriteScreen()
+                
+            // const OnBoardingScreen()
+            // const StartScreen()
+          ));
     });
   }
 
@@ -38,33 +50,29 @@ class _SplashScreeenState extends State<SplashScreeen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Stack(children: [
-          Align(
-            alignment: Alignment.topCenter,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 212.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    height: 123.63,
-                    width: 181.33,
-                    child: Image.asset('assets/Group.png'),
-                  ),
-                  const SizedBox(height: 5),
-                  SizedBox(
-                    height: 27,
-                    width: 196,
-                    child: Text(
-                      "Kimiko's Place",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.inter(
-                        fontSize: 27,
-                        fontWeight: FontWeight.w800,
-                        color: const Color.fromRGBO(255, 255, 255, 1),
-                      ),
-                    ),
-                  ),
-                ],
+          Positioned(
+            top: 212.h,
+            left: 121.41,
+            child: Container(
+              height: 123.63.h,
+              width: 181.33.w,
+              child: Image.asset('assets/Group.png'),
+            ),
+          ),
+          Positioned(
+            top: 341.39.h,
+            left: 115.w,
+            child: Container(
+              height: 27.h,
+              width: 196.w,
+              child: Text(
+                "Kimiko's Place",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.inter(
+                  fontSize: 27.sp,
+                  fontWeight: FontWeight.w800,
+                  color: const Color.fromRGBO(255, 255, 255, 1),
+                ),
               ),
             ),
           ),
