@@ -10,7 +10,7 @@ class ReadNfcScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/Enable_NFC.png'),
           fit: BoxFit.cover,
@@ -23,7 +23,7 @@ class ReadNfcScreen extends StatelessWidget {
             Positioned(
               top: 98.h,
               left: 96.05.w,
-              child: Container(
+              child: SizedBox(
                 height: 409.19.h,
                 width: 294.9.w,
                 child: Image.asset('assets/tap_nfc.png'),
@@ -33,7 +33,7 @@ class ReadNfcScreen extends StatelessWidget {
               top: 637.h,
               left: 24.w,
               child: Center(
-                child: Container(
+                child: SizedBox(
                   //margin: EdgeInsets.all(10.r),
                   height: 158.h,
                   width: 382.w,
@@ -41,7 +41,7 @@ class ReadNfcScreen extends StatelessWidget {
                     // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Center(
-                        child: Container(
+                        child: SizedBox(
                           height: 78.h,
                           width: 382.w,
                           child: Text(

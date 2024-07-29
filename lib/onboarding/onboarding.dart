@@ -16,7 +16,7 @@ class MyOnboarding extends StatefulWidget {
 class _MyOnboardingState extends State<MyOnboarding> {
   final CarouselController _carouselController = CarouselController();
   int _currentOnboard = 0;
-  PageController _controller = PageController();
+  // final PageController _controller = PageController();
 
   final List<Map<String, dynamic>> _carouselItems = [
     {
@@ -36,38 +36,33 @@ class _MyOnboardingState extends State<MyOnboarding> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/Enable_NFC.png'),
           fit: BoxFit.cover,
         ),
       ),
       child: Scaffold(
-        backgroundColor: Colors.transparent,
+        backgroundColor: const Color.fromRGBO(0, 0, 0, 0),
         body: Stack(children: [
-          Positioned(
-            top: 98.h,
-            left: 35.w,
-            child: Container(
-              width: 382,
-              //MediaQuery.of(context).size.width - 60.w,
-              height: 620.h,
-              child: CarouselSlider(
-                items: _carouselItems
-                    .map((item) => Builder(builder: (BuildContext context) {
-                          return Column(children: [
-                            Container(
-                              height: 360.h,
-                              width: 360.w,
-                              child: Image.asset(item['image']),
-                            ),
-                            SizedBox(
-                              height: 20.h,
-                            ),
-                            Container(
-                              height: 222.h,
-                              width: 382.w,
-                              child: Text(
+          CarouselSlider(
+            items: _carouselItems
+                .map((item) => Builder(builder: (BuildContext context) {
+                      return Positioned(
+                        top: 100.h,
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            // mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                item['image'],
+                                height: 333.46.h,
+                                width: 350.w,
+                              ),
+                              // SizedBox(
+                              //   height: 250.h,
+                              // ),
+                              Text(
                                 item['text'],
                                 style: GoogleFonts.inter(
                                   fontSize: 50.sp,
@@ -76,33 +71,31 @@ class _MyOnboardingState extends State<MyOnboarding> {
                                   height: (55.29 / 50).h,
                                 ),
                               ),
-                            ),
-                          ]);
-                        }))
-                    .toList(),
-                carouselController: _carouselController,
-                options: CarouselOptions(
-                  autoPlay: true,
-                  autoPlayInterval: Duration(milliseconds: 1500),
-                  height: 620.h,
-                  viewportFraction: 1.0,
-                  enlargeCenterPage: false,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _currentOnboard = index;
-                    });
-                  },
-                ),
-              ),
+                            ]),
+                      );
+                    }))
+                .toList(),
+            carouselController: _carouselController,
+            options: CarouselOptions(
+              autoPlay: false,
+              autoPlayInterval: const Duration(milliseconds: 1500),
+              height: double.infinity,
+              viewportFraction: 1.0,
+              enlargeCenterPage: false,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  _currentOnboard = index;
+                });
+              },
             ),
           ),
           Positioned(
-            top: 814.41.h,
+            bottom: 25.h,
             left: 26.w,
-            child: OnBoardContainer(),
+            child: const OnBoardContainer(),
           ),
           Positioned(
-            top: 471.28.h,
+            top: 520.h,
             left: 197.w,
             child: AnimatedSmoothIndicator(
               activeIndex: _currentOnboard,
@@ -110,7 +103,7 @@ class _MyOnboardingState extends State<MyOnboarding> {
               effect: WormEffect(
                 dotHeight: 8.h,
                 dotWidth: 8.w,
-                activeDotColor: Color.fromRGBO(252, 171, 16, 1),
+                activeDotColor: const Color.fromRGBO(252, 171, 16, 1),
               ),
             ),
           )

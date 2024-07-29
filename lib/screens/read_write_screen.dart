@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../components/container1.dart';
 import 'read_nfc_screen.dart';
@@ -10,7 +9,7 @@ class ReadandWriteNfc extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         image: DecorationImage(
           image: AssetImage('assets/Enable_NFC.png'),
           fit: BoxFit.cover,
@@ -28,10 +27,10 @@ class ReadandWriteNfc extends StatelessWidget {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (contect) => ReadNfcScreen()));
+                            builder: (contect) => const ReadNfcScreen()));
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 MyContainer1(
                   text: 'Add Menu',
                   onTap: () {},

@@ -5,11 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quick_menu/onboarding/onboarding.dart';
 
-import '../constant/app_color.dart';
-import '../onboarding/onbd.dart';
-import 'enable_nfc_screen.dart';
-import 'write_screen.dart';
-
 class SplashScreeen extends StatefulWidget {
   const SplashScreeen({super.key});
 
@@ -23,9 +18,9 @@ class _SplashScreeenState extends State<SplashScreeen> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (c) =>const MyOnboarding(),
-                //const WriteScreen()
-                
+            builder: (c) => const MyOnboarding(),
+            //const WriteScreen()
+
             // const OnBoardingScreen()
             // const StartScreen()
           ));
@@ -53,7 +48,7 @@ class _SplashScreeenState extends State<SplashScreeen> {
           Positioned(
             top: 212.h,
             left: 121.41,
-            child: Container(
+            child: SizedBox(
               height: 123.63.h,
               width: 181.33.w,
               child: Image.asset('assets/Group.png'),
@@ -62,7 +57,7 @@ class _SplashScreeenState extends State<SplashScreeen> {
           Positioned(
             top: 341.39.h,
             left: 115.w,
-            child: Container(
+            child: SizedBox(
               height: 27.h,
               width: 196.w,
               child: Text(

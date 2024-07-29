@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../screens/read_write_screen.dart';
-import '../screens/read_nfc_screen.dart';
 
 class MyContainer1 extends StatelessWidget {
   const MyContainer1({
@@ -23,12 +22,12 @@ class MyContainer1 extends StatelessWidget {
         height: 48.h,
         width: 382.w,
         decoration: BoxDecoration(
-          color: Color.fromRGBO(252, 171, 16, 1),
+          color: const Color.fromRGBO(252, 171, 16, 1),
           borderRadius: BorderRadius.circular(8),
           border: Border(
             top: BorderSide(
               width: 1.0.w,
-              color: Color.fromRGBO(239, 239, 239, 1),
+              color: const Color.fromRGBO(239, 239, 239, 1),
             ),
           ),
         ),
@@ -45,12 +44,12 @@ class MyContainer1 extends StatelessWidget {
                   height: (19.6 / 16).h,
                 ),
               ),
-              SizedBox(width: 10),
-              Container(
+              const SizedBox(width: 10),
+              SizedBox(
                 height: 20.h,
                 width: 20.w,
-                child: Icon(Icons.arrow_forward_outlined,
-                    color: const Color.fromRGBO(239, 239, 239, 1)),
+                child: const Icon(Icons.arrow_forward_outlined,
+                    color: Color.fromRGBO(239, 239, 239, 1)),
               ),
             ],
           ),
@@ -84,7 +83,7 @@ class MyContainer2 extends StatelessWidget {
             border: Border(
               top: BorderSide(
                 width: 1.0.w,
-                color: Color.fromRGBO(239, 239, 239, 1),
+                color: const Color.fromRGBO(239, 239, 239, 1),
               ),
             ),
           ),
@@ -101,12 +100,12 @@ class MyContainer2 extends StatelessWidget {
                     height: (19.6 / 16).h,
                   ),
                 ),
-                SizedBox(width: 10),
-                Container(
+                const SizedBox(width: 10),
+                SizedBox(
                   height: 20.h,
                   width: 20.w,
-                  child: Icon(Icons.camera_alt_outlined,
-                      color: const Color.fromRGBO(239, 239, 239, 1)),
+                  child: const Icon(Icons.camera_alt_outlined,
+                      color: Color.fromRGBO(239, 239, 239, 1)),
                 ),
               ],
             ),
@@ -122,26 +121,28 @@ class OnBoardContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 48.h,
       width: 380.w,
       child: Row(
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (contect) => ReadandWriteNfc()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (contect) => const ReadandWriteNfc()));
             },
             child: Container(
               width: 281.w,
               height: 48.h,
               decoration: BoxDecoration(
-                color: Color.fromRGBO(252, 171, 16, 1),
+                color: const Color.fromRGBO(252, 171, 16, 1),
                 borderRadius: BorderRadius.circular(8),
                 border: Border(
                   top: BorderSide(
                     width: 1.0.w,
-                    color: Color.fromRGBO(239, 239, 239, 1),
+                    color: const Color.fromRGBO(239, 239, 239, 1),
                   ),
                 ),
               ),
@@ -157,12 +158,12 @@ class OnBoardContainer extends StatelessWidget {
                       height: (19.36 / 16).h,
                     ),
                   ),
-                  SizedBox(width: 10),
-                  Container(
+                  const SizedBox(width: 10),
+                  SizedBox(
                     height: 20.h,
                     width: 20.w,
-                    child: Icon(Icons.arrow_forward_outlined,
-                        color: const Color.fromRGBO(66, 66, 66, 1)),
+                    child: const Icon(Icons.arrow_forward_outlined,
+                        color: Color.fromRGBO(66, 66, 66, 1)),
                   ),
                 ],
               ),
@@ -179,10 +180,10 @@ class OnBoardContainer extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
                     width: 1,
-                    color: Color.fromRGBO(180, 180, 180, 1),
+                    color: const Color.fromRGBO(180, 180, 180, 1),
                   ),
                 ),
-                child: Icon(Icons.add_circle_outline_rounded)),
+                child: const Icon(Icons.add_circle_outline_rounded)),
           ),
         ],
       ),
