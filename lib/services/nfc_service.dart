@@ -9,6 +9,8 @@ import '../models/menu_item.dart';
 import '../providers/menu_provider.dart';
 
 class NfcService {
+
+  // Reads from an NFC storage device
   static Future<void> readNfc(BuildContext context) async {
     try {
       var availability = await FlutterNfcKit.nfcAvailability;
@@ -57,6 +59,8 @@ class NfcService {
     }
   }
 
+
+//Writes to an NFC storage device
   static Future<void> writeNfc(
       BuildContext context, List<MenuItem> menuItems) async {
     var message = [
@@ -94,6 +98,16 @@ class NfcService {
       await FlutterNfcKit.finish();
     }
   }
+
+  //Checks if NFC is available
+Future<bool> isNfcEnabled() async {
+  try {
+    var availability = await FlutterNfcKit.nfcAvailability;
+    return availability == NFCAvailability.available;
+  } catch (e) {
+    return false;
+  }
+}
 
   static void _showErrorDialog(BuildContext context, String message) {
     if (context.mounted) {

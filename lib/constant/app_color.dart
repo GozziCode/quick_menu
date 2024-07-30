@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static const black = Color.fromRGBO(42, 42, 42, 1);
+  static const black = Color(0xFF2A2A2A);
+  static const textColor = Color(0xFF424242);
+  static const iconColor = Color(0xFF292D32);
+  static const borderColor = Color(0xFFB4B4B4);
+
   static const white = Colors.white;
-  static const bgColor = Color.fromRGBO(250, 250, 250, 1);
-  static const cardBgColor = Color.fromRGBO(237, 237, 237, 0.67);
+  static const bgColor = Color(0xFFFFFFFF);
+
   static const lightGrey = Colors.grey;
-  // fromRGBO(42, 42, 42, 1);
-  static const primaryColor = Color(0xFFFF7F7D);
+
+  static const primaryColor = Color(0xFFFCAB10);
   static const red = Color(0xffd32f2f);
   static const green = Color(0xff388e3c);
 }
