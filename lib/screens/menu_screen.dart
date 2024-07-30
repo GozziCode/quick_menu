@@ -15,8 +15,14 @@ class MenuScreen extends StatelessWidget {
         title: const Text("Menu Liat"),
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
-        bottom:
-            PreferredSize(preferredSize: Size(double.infinity, 80.h), child: Container()),
+        bottom: PreferredSize(
+            preferredSize: Size(double.infinity, 80.h),
+            child: Container(
+              decoration: const BoxDecoration(),
+              child: const TextField(
+                decoration: InputDecoration(border: InputBorder.none),
+              ),
+            )),
       ),
       body: ListView.separated(
           scrollDirection: Axis.vertical,
