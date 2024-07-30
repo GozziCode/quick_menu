@@ -107,7 +107,7 @@ class EditForm extends StatelessWidget {
             children: [
               Expanded(
                 child: TextFormField(
-                  controller: category,
+                  controller: price,
                   decoration: const InputDecoration(
                       contentPadding: EdgeInsets.symmetric(horizontal: 15),
                       border: InputBorder.none),

@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quick_menu/screens/onboarding/onboarding.dart';
 import 'package:quick_menu/services/nfc_service.dart';
 
-
+import 'onboarding/widgets/enable_nfc_screen.dart';
 
 class SplashScreeen extends StatefulWidget {
   const SplashScreeen({super.key});
@@ -31,9 +31,9 @@ class _SplashScreeenState extends State<SplashScreeen> {
       } else {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const OnboardingScreen()
-              // const EnableNfcScreen(),
-              ),
+          MaterialPageRoute(
+            builder: (context) => const EnableNfcScreen(),
+          ),
         );
       }
     });
