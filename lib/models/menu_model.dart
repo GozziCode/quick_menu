@@ -31,10 +31,16 @@ class MenuModel {
 }
 
 class Menu {
+  String title;
   Map<String, List<MenuModel>> map;
   List<String> categories;
+  DateTime dateTime;
 
-  Menu({required this.map, required this.categories});
+  Menu(
+      {required this.map,
+      required this.categories,
+      required this.dateTime,
+      required this.title});
 
   factory Menu.fromList(List<MenuModel> items) {
     Map<String, List<MenuModel>> menuMap = {};
@@ -50,6 +56,10 @@ class Menu {
       menuMap[item.category]?.add(item);
     }
 
-    return Menu(map: menuMap, categories: menuCategories);
+    return Menu(
+        title: "Sunday's Special",
+        map: menuMap,
+        categories: menuCategories,
+        dateTime: DateTime.now());
   }
 }

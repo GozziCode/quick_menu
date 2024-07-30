@@ -1,14 +1,42 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:quick_menu/constant/app_color.dart';
-import 'package:quick_menu/screens/write/searching_screen.dart';
+import 'package:quick_menu/screens/read/searching_screen.dart';
+import 'package:quick_menu/screens/write/menu_list_screen.dart';
+
+import '../models/menu_model.dart';
 
 class OptionBridge extends StatelessWidget {
   const OptionBridge({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    List<MenuModel>? menuItem = [
+      MenuModel(
+          name: "name",
+          description: "description",
+          price: 23.0,
+          category: "category"),
+      MenuModel(
+          name: "name",
+          description: "description",
+          price: 23.0,
+          category: "category"),
+      MenuModel(
+          name: "name",
+          description: "description",
+          price: 23.0,
+          category: "category1"),
+      MenuModel(
+          name: "name",
+          description: "description",
+          price: 23.0,
+          category: "category1"),
+    ];
+
+    final menu = Menu.fromList(menuItem);
+
+    return Scaffold(
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +59,9 @@ class OptionBridge extends StatelessWidget {
               child: NfcChoice(
                 text: 'Write a Menu',
                 imageUrl: 'assets/images/write.png',
-                screen: SizedBox(),
+                screen: MenuListScreen(
+                  menus: [menu],
+                ),
               ),
             ),
           ],

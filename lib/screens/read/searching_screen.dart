@@ -43,14 +43,14 @@ class _SearchingScreenState extends State<SearchingScreen> {
       final menu = Menu.fromList(menuItem);
 
       if (menuItem != null) {
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => MenuScreen(menu: menu),
           ),
         );
       } else {
-        Navigator.pushReplacement(
+        Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => const SizedBox(),
@@ -59,7 +59,7 @@ class _SearchingScreenState extends State<SearchingScreen> {
       }
     } catch (e) {
       print('Error reading NFC: $e');
-      Navigator.pushReplacement(
+      Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => const SizedBox(),
@@ -70,8 +70,8 @@ class _SearchingScreenState extends State<SearchingScreen> {
 
   @override
   void initState() {
-    super.initState();
     _readingNfc();
+    super.initState();
   }
 
   @override

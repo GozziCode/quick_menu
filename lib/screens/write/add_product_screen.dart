@@ -3,14 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:quick_menu/constant/app_color.dart';
+import 'package:quick_menu/screens/write/widgets/edit_form.dart';
 
-import '../../../components/action_button.dart';
-import '../../../models/menu_model.dart';
-import '../../../providers/menu_provider.dart';
-import '../../../services/nfc_service.dart';
-import '../../alert_box.dart';
-
-import 'widgets/edit_form.dart';
+import '../../components/action_button.dart';
+import '../../models/menu_model.dart';
+import '../../providers/menu_provider.dart';
+import '../../services/nfc_service.dart';
+import '../alert_box.dart';
 
 class AddNewProduct extends StatefulWidget {
   const AddNewProduct({super.key});

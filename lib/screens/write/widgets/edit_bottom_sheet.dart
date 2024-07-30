@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../../constant/app_color.dart';
+import '../../../constant/app_color.dart';
+import '../../../models/menu_model.dart';
 import 'edit_form.dart';
 
 class EditBottomSheet extends StatelessWidget {
@@ -11,11 +12,17 @@ class EditBottomSheet extends StatelessWidget {
   final TextEditingController categoryController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
+  final MenuModel menuModel;
 
-  EditBottomSheet({super.key});
+  EditBottomSheet({super.key, required this.menuModel});
 
   @override
   Widget build(BuildContext context) {
+    priceController.text = menuModel.price.toString();
+    categoryController.text = menuModel.category;
+    productNameController.text = menuModel.name;
+    descriptionController.text = menuModel.description;
+
     return Padding(
       padding: EdgeInsets.only(
         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -24,29 +31,29 @@ class EditBottomSheet extends StatelessWidget {
         onTap: FocusScope.of(context).unfocus,
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 23.0.w),
+            padding: EdgeInsets.only(
+              right: 23.0.w,
+              left: 23.0.w,
+              top: 23.0.w,
+            ),
             child: Column(
               children: [
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () => Navigator.pop(context),
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Update Product',
+                      style: GoogleFonts.inter(
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.textColor),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ],
                 ),
-                 SizedBox(height: 15.h),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Update Product',
-              style: GoogleFonts.inter(
-                  fontSize: 20.sp,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.textColor),
-            ),
-          ],
-        ),
                 EditForm(
                     productName: productNameController,
                     category: categoryController,
@@ -60,14 +67,8 @@ class EditBottomSheet extends StatelessWidget {
                       width: 384.w,
                       height: 52.h,
                       decoration: BoxDecoration(
-                        color: AppColors.lightGrey,
+                        color: AppColors.primaryColor,
                         borderRadius: BorderRadius.circular(10),
-                        border: Border(
-                          top: BorderSide(
-                            width: 1.0.w,
-                            color: AppColors.borderColor,
-                          ),
-                        ),
                       ),
                       child: Center(
                         child: Text(
@@ -75,7 +76,7 @@ class EditBottomSheet extends StatelessWidget {
                           style: GoogleFonts.inter(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
-                            color: AppColors.textColor,
+                            color: AppColors.white,
                             height: (19.36 / 16).h,
                           ),
                         ),
@@ -91,6 +92,3 @@ class EditBottomSheet extends StatelessWidget {
     );
   }
 }
-
-
-
