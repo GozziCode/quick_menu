@@ -3,12 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quick_menu/constant/app_color.dart';
 
-
-
 class ActionButton extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
   final Widget? icon;
+
   const ActionButton({
     super.key,
     required this.text,
@@ -26,12 +25,6 @@ class ActionButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.primaryColor,
           borderRadius: BorderRadius.circular(8),
-          border: Border(
-            top: BorderSide(
-              width: 1.0.w,
-              color: AppColors.borderColor,
-            ),
-          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -39,9 +32,9 @@ class ActionButton extends StatelessWidget {
             Text(
               text,
               style: GoogleFonts.inter(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w500,
-                color: AppColors.textColor,
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w600,
+                color: AppColors.white,
                 height: (19.36 / 16).h,
               ),
             ),

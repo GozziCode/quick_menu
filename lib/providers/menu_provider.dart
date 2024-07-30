@@ -1,59 +1,69 @@
-
 import 'package:flutter/material.dart';
-import '../models/menu_item.dart';
+import '../models/menu_model.dart';
 
 class MenuProvider with ChangeNotifier {
-  List<MenuItem> _menuItems = [];
+  List<Menu> menus = [];
 
-  List<MenuItem> get menuItems => _menuItems;
-
-  void setMenuItems(List<MenuItem> items) {
-    _menuItems = items;
+  void addMenu(Menu item) {
+    menus.add(item);
+    print(item.title);
+    print(menus.length);
     notifyListeners();
   }
 
-  // void toggleAvailability(String id) {
-  //   var index = _menuItems.indexWhere((item) => item.id == id);
-  //   if (index != -1) {
-  //     _menuItems[index].isAvailable = !_menuItems[index].isAvailable;
-  //     notifyListeners();
-  //   }
-  // }
+  Menu getMenu(int index) {
+    return menus[index];
+  }
 
-  void addItem(MenuItem item) {
-    _menuItems.add(item);
+  void deleteMenu(String title) {
+    menus.removeWhere((menu) => menu.title == title);
     notifyListeners();
   }
 
-  // void updateMenuItemAvailability(String id, bool isAvailable) {
-  //   var index = _menuItems.indexWhere((item) => item.id == id);
-  //   if (index != -1) {
-  //     _menuItems[index].isAvailable = isAvailable;
-  //     notifyListeners();
-  //   }
-  // }
-
-  void editMenuItem(String id, MenuItem newItem) {
-    var index = _menuItems.indexWhere((item) => item.id == id);
+  void editMenuModel(String menuTitle, MenuModel editModel, String category) {
+    int index = menus.indexWhere((menu) => menu.title == menuTitle);
     if (index != -1) {
-      _menuItems[index] = newItem;
+      Menu target = menus[index];
+      int? modelIndex = target.map[category]
+          ?.indexWhere((model) => model.name == editModel.name);
+
+      if (index != -1) {
+        target.map[category]?[modelIndex!] = editModel;
+      } else {
+        target.map[category]?.add(editModel);
+      }
       notifyListeners();
     }
   }
 
-  void deleteMenuItem(String id) {
-    _menuItems.removeWhere((item) => item.id == id);
-    notifyListeners();
+  void removeMenuModel(
+      String menuTitle, MenuModel removeModel, String category) {
+    int index = menus.indexWhere((menu) => menu.title == menuTitle);
+    if (index != -1) {
+      Menu target = menus[index];
+      int? modelIndex = target.map[category]
+          ?.indexWhere((model) => model.name == removeModel.name);
+
+      if (index != -1) {
+        target.map[category]
+            ?.removeWhere((menu) => menu.name == removeModel.name);
+      }
+      if (target.map[category]!.isEmpty) {
+        target.categories
+            .removeWhere((category) => category == removeModel.category);
+      }
+      notifyListeners();
+    }
   }
 
-  Map<String, List<MenuItem>> get menuItemsByCategory {
-    Map<String, List<MenuItem>> itemsByCategory = {};
-    for (var item in _menuItems) {
-      if (!itemsByCategory.containsKey(item.category)) {
-        itemsByCategory[item.category] = [];
-      }
-      itemsByCategory[item.category]!.add(item);
-    }
-    return itemsByCategory;
-  }
+// Map<String, List<MenuModel>> get MenuModelsByCategory {
+//   Map<String, List<MenuModel>> itemsByCategory = {};
+//   for (var item in _MenuModels) {
+//     if (!itemsByCategory.containsKey(item.category)) {
+//       itemsByCategory[item.category] = [];
+//     }
+//     itemsByCategory[item.category]!.add(item);
+//   }
+//   return itemsByCategory;
+// }
 }

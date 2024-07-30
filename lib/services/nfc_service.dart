@@ -3,50 +3,54 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:nfc_manager/nfc_manager.dart';
-import 'package:quick_menu/models/menu_item.dart';
+import 'package:quick_menu/models/menu_model.dart';
 
 Future<bool> isNfcAvailable() async {
   return await NfcManager.instance.isAvailable();
 }
 
-Future<void> writeMenuToNfc(MenuItem menuItem) async {
+Future<String> writeMenuToNfc(Menu menu) async {
+  String status = "";
   bool isAvailable = await NfcManager.instance.isAvailable();
 
   if (!isAvailable) {
     print('NFC is not available on this device');
-    return;
+    status = "not available";
+    return status;
   }
 
   // Serialize the MenuItem to JSON
-  String jsonMenuItem = jsonEncode(menuItem.toJson());
+  String jsonMenuItem = jsonEncode(menu.toJson());
 
   NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
     var ndef = Ndef.from(tag);
 
     if (ndef == null) {
       print('Tag is not NDEF compatible');
+      status = "tag not compatible";
       return;
     }
 
     NdefMessage message = NdefMessage([
-      NdefRecord.createMime(
-        'application/json',
-        Uint8List.fromList(utf8.encode(jsonMenuItem)),
+      NdefRecord.createText(
+        jsonMenuItem,
       ),
     ]);
 
     try {
       await ndef.write(message);
       print('MenuItem written successfully to NFC tag');
+      status = "MenuItem written successfully to NFC tag";
     } catch (e) {
       print('Error writing to NFC: $e');
     } finally {
       NfcManager.instance.stopSession();
     }
   });
+  return status;
 }
 
-Future<MenuItem?> readMenuFromNfc() async {
+Future<Menu?> readMenuFromNfc() async {
   bool isAvailable = await NfcManager.instance.isAvailable();
 
   if (!isAvailable) {
@@ -54,7 +58,7 @@ Future<MenuItem?> readMenuFromNfc() async {
     return null;
   }
 
-  Completer<MenuItem?> completer = Completer<MenuItem?>();
+  Completer<Menu?> completer = Completer<Menu?>();
 
   NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
     var ndef = Ndef.from(tag);
@@ -66,19 +70,19 @@ Future<MenuItem?> readMenuFromNfc() async {
 
     try {
       var records = await ndef.read();
+
       for (NdefRecord record in records.records) {
         if (record.typeNameFormat == NdefTypeNameFormat.nfcWellknown) {
-          String jsonString = String.fromCharCodes(record.payload);
+          // String jsonString = String.fromCharCodes(record.payload);
+          //print(jsonString);
+          String tryString = String.fromCharCodes(record.payload);
+          String jsonString = tryString.substring(tryString.indexOf('{'));
           Map<String, dynamic> json = jsonDecode(jsonString);
-          MenuItem menuItem = MenuItem(
-            id: json['id'],
-            name: json['name'],
-            description: json['description'],
-            price: json['price'],
-            category: json['category'],
-          );
-          print(menuItem);
-          completer.complete(menuItem);
+          //print(json);
+          Menu menu = Menu.fromJson(json);
+
+          completer.complete(menu);
+
           return;
         }
       }
