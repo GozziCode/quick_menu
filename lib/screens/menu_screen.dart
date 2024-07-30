@@ -14,14 +14,15 @@ class MenuScreen extends StatelessWidget {
         title: const Text("Menu List"),
         backgroundColor: AppColors.bgColor,
         surfaceTintColor: Colors.transparent,
-
+        bottom:
+            PreferredSize(preferredSize: Size(double.infinity, 80.h), child: Container()),
       ),
       body: ListView.separated(
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {
             return const MenuCategory();
           },
-          separatorBuilder: (context, int) {
+          separatorBuilder: (context, i) {
             return const Padding(
               padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24),
               child: Divider(),
