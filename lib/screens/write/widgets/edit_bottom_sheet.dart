@@ -1,10 +1,13 @@
 // edit_bottom_sheet.dart
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../../constant/app_color.dart';
 import '../../../models/menu_model.dart';
+import '../bloc/menu_bloc.dart';
+import '../bloc/menu_event.dart';
 import 'edit_form.dart';
 
 class EditBottomSheet extends StatelessWidget {
@@ -13,8 +16,10 @@ class EditBottomSheet extends StatelessWidget {
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final MenuModel menuModel;
+  final String menuTitle;
 
-  EditBottomSheet({super.key, required this.menuModel});
+  EditBottomSheet(
+      {super.key, required this.menuModel, required this.menuTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +67,17 @@ class EditBottomSheet extends StatelessWidget {
                 SizedBox(height: 30.h),
                 Center(
                   child: GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      MenuModel newMenuModel = MenuModel(
+                          name: menuModel.name,
+                          description: descriptionController.text,
+                          price: double.parse(priceController.text),
+                          category: categoryController.text);
+
+                      context.read<MenuBloc>().add(EditMenuModel(menuTitle,
+                          menuModel, categoryController.text, newMenuModel));
+                      Navigator.pop(context);
+                    },
                     child: Container(
                       width: 384.w,
                       height: 52.h,

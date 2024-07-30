@@ -25,12 +25,6 @@ class ActionButton extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.primaryColor,
           borderRadius: BorderRadius.circular(8),
-          border: Border(
-            top: BorderSide(
-              width: 1.0.w,
-              color: AppColors.borderColor,
-            ),
-          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,

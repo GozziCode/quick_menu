@@ -3,65 +3,34 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:quick_menu/constant/app_color.dart';
 
+import '../../models/menu_model.dart';
 import '../../services/nfc_service.dart';
 import '../menu_screen.dart';
 
-class SearchingScreen extends StatefulWidget {
-  const SearchingScreen({super.key});
+class WritingScreen extends StatefulWidget {
+  final Menu menu;
+
+  const WritingScreen({super.key, required this.menu});
 
   @override
-  State<SearchingScreen> createState() => _SearchingScreenState();
+  State<WritingScreen> createState() => _WritingScreenState();
 }
 
-class _SearchingScreenState extends State<SearchingScreen> {
+class _WritingScreenState extends State<WritingScreen> {
   Future<void> _readingNfc() async {
     try {
-      await readMenuFromNfc().then((menuModel) {
-        if (menuModel != null) {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => MenuScreen(menu: menuModel),
-            ),
-          );
-        } else {
-          // Handle the case when no valid NFC data is found
-          showDialog(
+      await writeMenuToNfc(widget.menu).then((onValue) {
+        print("Status");
+        showModalBottomSheet(
             context: context,
-            builder: (context) => AlertDialog(
-              title: Text('No Menu Data'),
-              content: Text('No valid menu data was found on the NFC tag.'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text('OK'),
+            builder: (context) {
+              return Center(
+                child: Container(
+                  child: Text(onValue),
                 ),
-              ],
-            ),
-          );
-        }
-      }).catchError((error) {
-        // Handle errors and prompt the user to try again
-        showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Error'),
-            content: Text(
-                'An error occurred while reading the NFC tag. Please try again.'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text('OK'),
-              ),
-              TextButton(
-                onPressed: () async {
-                  Navigator.pop(context);
-// Try again
-                },
-                child: Text('Try Again'),
-              ),
-            ],
-          ),
-        );
+              );
+            });
+        Navigator.pop(context);
       });
     } catch (e) {
       print('Error reading NFC: $e');

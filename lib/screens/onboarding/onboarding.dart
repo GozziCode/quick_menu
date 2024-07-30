@@ -161,27 +161,3 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 }
-
-//
-// SizedBox(width: 10.w),
-// GestureDetector(
-// onTap: () {
-// Navigator.push(
-// context,
-// MaterialPageRoute(
-// builder: (c) => const AddNewProduct(),
-// ));
-// },
-// child: Container(
-// width: 83.w,
-// height: 52.h,
-// decoration: BoxDecoration(
-// borderRadius: BorderRadius.circular(8),
-// border: Border.all(
-// width: 1,
-// color: AppColors.borderColor,
-// ),
-// ),
-// child: const Icon(Icons.add_circle_outline_rounded,
-// color: AppColors.iconColor)),
-// ),

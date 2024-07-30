@@ -82,6 +82,9 @@ class EditForm extends StatelessWidget {
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
                 borderSide: BorderSide(color: AppColors.lightGrey)),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+                borderSide: BorderSide(color: AppColors.lightGrey)),
             fillColor: Colors.white,
             hintText: category.text,
           ),

@@ -1,4 +1,6 @@
-class MenuModel {
+import 'package:equatable/equatable.dart';
+
+class MenuModel extends Equatable {
   final String name;
   final String description;
   final double price;
@@ -10,6 +12,10 @@ class MenuModel {
     required this.price,
     required this.category,
   });
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [name, description, price, category];
 
   factory MenuModel.fromJson(Map<String, dynamic> json) {
     return MenuModel(
@@ -30,7 +36,7 @@ class MenuModel {
   }
 }
 
-class Menu {
+class Menu extends Equatable {
   String title;
   Map<String, List<MenuModel>> map;
   List<String> categories;
@@ -41,6 +47,10 @@ class Menu {
       required this.categories,
       required this.dateTime,
       required this.title});
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [title, map, categories, dateTime];
 
   factory Menu.fromList(List<MenuModel> items) {
     Map<String, List<MenuModel>> menuMap = {};
@@ -61,5 +71,35 @@ class Menu {
         map: menuMap,
         categories: menuCategories,
         dateTime: DateTime.now());
+  }
+
+  factory Menu.fromJson(Map<String, dynamic> json) {
+    return Menu(
+      title: json['title'],
+      map: (json['map'] as Map<String, dynamic>).map(
+        (key, value) => MapEntry(
+          key,
+          (value as List<dynamic>)
+              .map((item) => MenuModel.fromJson(item))
+              .toList(),
+        ),
+      ),
+      categories: List<String>.from(json['categories']),
+      dateTime: DateTime.parse(json['dateTime']),
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'map': map.map(
+        (key, value) => MapEntry(
+          key,
+          value.map((item) => item.toJson()).toList(),
+        ),
+      ),
+      'categories': categories,
+      'dateTime': dateTime.toIso8601String(),
+    };
   }
 }

@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:quick_menu/screens/write/bloc/menu_bloc.dart';
+
+import 'package:quick_menu/screens/write/bloc/menu_state.dart';
 import 'package:quick_menu/screens/write/widgets/add_bottom_sheet.dart';
 import 'package:quick_menu/screens/write/widgets/edit_bottom_sheet.dart';
 
@@ -8,9 +12,9 @@ import '../../constant/app_color.dart';
 import '../../models/menu_model.dart';
 
 class EditCollectionScreen extends StatefulWidget {
-  final Menu menu;
+  final int index;
 
-  const EditCollectionScreen({super.key, required this.menu});
+  const EditCollectionScreen({super.key, required this.index});
 
   @override
   State<EditCollectionScreen> createState() => _EditCollectionScreenState();
@@ -19,52 +23,64 @@ class EditCollectionScreen extends StatefulWidget {
 class _EditCollectionScreenState extends State<EditCollectionScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Menu List"),
-        backgroundColor: AppColors.white,
-        surfaceTintColor: Colors.transparent,
-        actions: [
-          IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.delete))
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _showAddBottomSheet(context);
-        },
-        backgroundColor: AppColors.primaryColor,
-        shape: const OvalBorder(),
-        child: const Icon(
-          CupertinoIcons.add,
-          color: AppColors.white,
-          size: 32.0,
+    return BlocBuilder<MenuBloc, MenuState>(builder: (context, state) {
+      Menu menu = state.menus[widget.index];
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            menu.title,
+            style: TextStyle(fontWeight: FontWeight.w600),
+          ),
+          backgroundColor: AppColors.white,
+          surfaceTintColor: Colors.transparent,
+          actions: [
+            IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.delete))
+          ],
         ),
-      ),
-      body: ListView.separated(
-          scrollDirection: Axis.vertical,
-          itemBuilder: (context, index) {
-            String categoryName = widget.menu.categories[index];
-            List<MenuModel>? categoryItems = widget.menu.map[categoryName];
-            return _MenuCategory(
-                categoryList: categoryItems!, category: categoryName);
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            _showAddBottomSheet(context, menu.title);
           },
-          separatorBuilder: (context, index) {
-            return const Padding(
-              padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24),
-              child: Divider(),
-            );
-          },
-          itemCount: widget.menu.categories.length),
-    );
+          backgroundColor: AppColors.primaryColor,
+          shape: const OvalBorder(),
+          child: const Icon(
+            CupertinoIcons.add,
+            color: AppColors.white,
+            size: 32.0,
+          ),
+        ),
+        body: ListView.separated(
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index) {
+              String categoryName = menu.categories[index];
+              List<MenuModel>? categoryItems = menu.map[categoryName];
+              return _MenuCategory(
+                categoryList: categoryItems!,
+                category: categoryName,
+                title: menu.title,
+              );
+            },
+            separatorBuilder: (context, index) {
+              return const Padding(
+                padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24),
+                child: Divider(),
+              );
+            },
+            itemCount: menu.categories.length),
+      );
+    });
   }
 }
 
 class _MenuCategory extends StatelessWidget {
   final List<MenuModel> categoryList;
   final String category;
+  final String title;
 
   const _MenuCategory(
-      {super.key, required this.categoryList, required this.category});
+      {required this.categoryList,
+      required this.category,
+      required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +102,7 @@ class _MenuCategory extends StatelessWidget {
                 MenuModel item = categoryList[index];
                 return _MenuItem(
                   menuModel: item,
+                  title: title,
                 );
               }),
             ),
@@ -96,8 +113,9 @@ class _MenuCategory extends StatelessWidget {
 
 class _MenuItem extends StatelessWidget {
   final MenuModel menuModel;
+  final String title;
 
-  const _MenuItem({super.key, required this.menuModel});
+  const _MenuItem({required this.menuModel, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +151,7 @@ class _MenuItem extends StatelessWidget {
           ),
         ),
         GestureDetector(
-            onTap: () => _showEditBottomSheet(context, menuModel),
+            onTap: () => _showEditBottomSheet(context, menuModel, title),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: SvgPicture.asset(
@@ -145,7 +163,8 @@ class _MenuItem extends StatelessWidget {
   }
 }
 
-void _showEditBottomSheet(BuildContext context, MenuModel menuModel) {
+void _showEditBottomSheet(
+    BuildContext context, MenuModel menuModel, String title) {
   showModalBottomSheet(
     backgroundColor: AppColors.bgColor,
     context: context,
@@ -161,6 +180,7 @@ void _showEditBottomSheet(BuildContext context, MenuModel menuModel) {
         builder: (_, controller) {
           return EditBottomSheet(
             menuModel: menuModel,
+            menuTitle: title,
           );
         },
       );
@@ -168,7 +188,7 @@ void _showEditBottomSheet(BuildContext context, MenuModel menuModel) {
   );
 }
 
-void _showAddBottomSheet(BuildContext context) {
+void _showAddBottomSheet(BuildContext context, String title) {
   showModalBottomSheet(
     backgroundColor: AppColors.bgColor,
     context: context,
@@ -182,7 +202,9 @@ void _showAddBottomSheet(BuildContext context) {
         snap: true,
         expand: false,
         builder: (_, controller) {
-          return AddBottomSheet();
+          return AddBottomSheet(
+            menuTitle: title,
+          );
         },
       );
     },

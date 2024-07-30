@@ -82,9 +82,9 @@ class _AddNewProductState extends State<AddNewProduct> {
                             price: double.parse(priceController.text),
                             category: 'Spicy',
                           );
-                          menuProvider.addItem(newItem);
-
-                          await writeMenuToNfc(newItem);
+                          // menuProvider.addItem(newItem);
+                          //
+                          // await writeMenuToNfc(newItem);
                           // _nameController.clear();
                           // _imageUrlController.clear();
                           // _descriptionController.clear();

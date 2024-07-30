@@ -35,7 +35,6 @@ class OptionBridge extends StatelessWidget {
     ];
 
     final menu = Menu.fromList(menuItem);
-
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -59,9 +58,7 @@ class OptionBridge extends StatelessWidget {
               child: NfcChoice(
                 text: 'Write a Menu',
                 imageUrl: 'assets/images/write.png',
-                screen: MenuListScreen(
-                  menus: [menu],
-                ),
+                screen: MenuListScreen(),
               ),
             ),
           ],
@@ -85,8 +82,10 @@ class NfcChoice extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-          context, MaterialPageRoute(builder: (context) => screen)),
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => screen));
+      },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
         padding: EdgeInsets.all(12.0),

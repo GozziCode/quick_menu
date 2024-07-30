@@ -9,22 +9,25 @@ Future<bool> isNfcAvailable() async {
   return await NfcManager.instance.isAvailable();
 }
 
-Future<void> writeMenuToNfc(MenuModel menuModel) async {
+Future<String> writeMenuToNfc(Menu menu) async {
+  String status = "";
   bool isAvailable = await NfcManager.instance.isAvailable();
 
   if (!isAvailable) {
     print('NFC is not available on this device');
-    return;
+    status = "not available";
+    return status;
   }
 
   // Serialize the MenuItem to JSON
-  String jsonMenuItem = jsonEncode(menuModel.toJson());
+  String jsonMenuItem = jsonEncode(menu.toJson());
 
   NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
     var ndef = Ndef.from(tag);
 
     if (ndef == null) {
       print('Tag is not NDEF compatible');
+      status = "tag not compatible";
       return;
     }
 
@@ -38,15 +41,17 @@ Future<void> writeMenuToNfc(MenuModel menuModel) async {
     try {
       await ndef.write(message);
       print('MenuItem written successfully to NFC tag');
+      status = "MenuItem written successfully to NFC tag";
     } catch (e) {
       print('Error writing to NFC: $e');
     } finally {
       NfcManager.instance.stopSession();
     }
   });
+  return status;
 }
 
-Future<MenuModel?> readMenuFromNfc() async {
+Future<Menu?> readMenuFromNfc() async {
   bool isAvailable = await NfcManager.instance.isAvailable();
 
   if (!isAvailable) {
@@ -54,7 +59,7 @@ Future<MenuModel?> readMenuFromNfc() async {
     return null;
   }
 
-  Completer<MenuModel?> completer = Completer<MenuModel?>();
+  Completer<Menu?> completer = Completer<Menu?>();
 
   NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
     var ndef = Ndef.from(tag);
@@ -70,14 +75,8 @@ Future<MenuModel?> readMenuFromNfc() async {
         if (record.typeNameFormat == NdefTypeNameFormat.nfcWellknown) {
           String jsonString = String.fromCharCodes(record.payload);
           Map<String, dynamic> json = jsonDecode(jsonString);
-          MenuModel menuItem = MenuModel(
-            name: json['name'],
-            description: json['description'],
-            price: json['price'],
-            category: json['category'],
-          );
-          print(menuItem);
-          completer.complete(menuItem);
+          Menu menu = Menu.fromJson(json);
+          completer.complete(menu);
           return;
         }
       }

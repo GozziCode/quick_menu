@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quick_menu/constant/app_color.dart';
 import 'package:quick_menu/screens/option_bridge.dart';
 
@@ -52,8 +51,7 @@ class _MenuCategory extends StatelessWidget {
   final List<MenuModel> categoryList;
   final String category;
 
-  const _MenuCategory(
-      {super.key, required this.categoryList, required this.category});
+  const _MenuCategory({required this.categoryList, required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -86,7 +84,7 @@ class _MenuCategory extends StatelessWidget {
 class _MenuItem extends StatelessWidget {
   final MenuModel menuModel;
 
-  const _MenuItem({super.key, required this.menuModel});
+  const _MenuItem({required this.menuModel});
 
   @override
   Widget build(BuildContext context) {
@@ -111,45 +109,26 @@ class _MenuItem extends StatelessWidget {
                   fontSize: 14.0,
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Text(
-                  "\$${menuModel.price.toStringAsFixed(2)}",
-                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-                ),
-              ),
             ],
           ),
         ),
-        GestureDetector(
-            // onTap: () => _showBottomSheet(context),
-            child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SvgPicture.asset(
-            'assets/svgs/edit.svg',
+
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: 8.0),
+          child: Text(
+            "\$${menuModel.price.toStringAsFixed(2)}",
+            style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
           ),
-        ))
+        ),
+        // GestureDetector(
+        //     // onTap: () => _showBottomSheet(context),
+        //     child: Padding(
+        //   padding: const EdgeInsets.all(8.0),
+        //   child: SvgPicture.asset(
+        //     'assets/svgs/edit.svg',
+        //   ),
+        // ))
       ],
     );
   }
 }
-//
-//
-// void _showBottomSheet(BuildContext context) {
-//   showModalBottomSheet(
-//     backgroundColor: AppColors.bgColor,
-//     context: context,
-//     isScrollControlled: true,
-//     builder: (BuildContext context) {
-//       return DraggableScrollableSheet(
-//         minChildSize: 0.5,
-//         maxChildSize: 0.8,
-//         initialChildSize: 0.7,
-//         expand: false,
-//         builder: (_, controller) {
-//           return EditBottomSheet();
-//         },
-//       );
-//     },
-//   );
-// }

@@ -1,27 +1,22 @@
 // edit_bottom_sheet.dart
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:quick_menu/screens/write/bloc/menu_bloc.dart';
+import 'package:quick_menu/screens/write/bloc/menu_event.dart';
+import 'package:quick_menu/screens/write/edit_collection_screen.dart';
+import 'package:quick_menu/screens/write/menu_list_screen.dart';
 
 import '../../../constant/app_color.dart';
+
 import '../../../models/menu_model.dart';
-import '../bloc/menu_bloc.dart';
-import '../bloc/menu_event.dart';
-import 'edit_form.dart';
+import '../../../providers/menu_provider.dart';
 
-class AddBottomSheet extends StatelessWidget {
-  final String menuTitle;
+class CreateMenuBottomSheet extends StatelessWidget {
+  CreateMenuBottomSheet({super.key});
 
-  AddBottomSheet({super.key, required this.menuTitle});
-
-  final TextEditingController productNameController = TextEditingController();
-
-  final TextEditingController categoryController = TextEditingController();
-
-  final TextEditingController descriptionController = TextEditingController();
-
-  final TextEditingController priceController = TextEditingController();
+  final _menuNameTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +34,13 @@ class AddBottomSheet extends StatelessWidget {
               top: 23.0.w,
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Add New Product',
+                      'Create a new Menu',
                       style: GoogleFonts.inter(
                           fontSize: 20.sp,
                           fontWeight: FontWeight.w600,
@@ -56,25 +52,44 @@ class AddBottomSheet extends StatelessWidget {
                     ),
                   ],
                 ),
-                EditForm(
-                    productName: productNameController,
-                    category: categoryController,
-                    description: descriptionController,
-                    price: priceController),
-                SizedBox(height: 30.h),
+                SizedBox(height: 24.h),
+                Text(
+                  'Menu Name',
+                  style: GoogleFonts.inter(
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.textColor),
+                ),
+                SizedBox(height: 8.h),
+                Container(
+                  height: 48.h,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.lightGrey),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: TextFormField(
+                    controller: _menuNameTextController,
+                    autofocus: true,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(borderSide: BorderSide.none),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 36.h,
+                ),
                 Center(
                   child: GestureDetector(
                     onTap: () {
-                      MenuModel newMenuModel = MenuModel(
-                          name: productNameController.text,
-                          description: descriptionController.text,
-                          price: double.parse(priceController.text),
-                          category: categoryController.text);
+                      if (_menuNameTextController.text != "") {
+                        Menu newMenu = Menu(
+                            map: {},
+                            categories: [],
+                            dateTime: DateTime.now(),
+                            title: _menuNameTextController.text);
+                        context.read<MenuBloc>().add(AddMenu(newMenu));
 
-                      context.read<MenuBloc>().add(EditMenuModel(menuTitle,
-                          null, categoryController.text, newMenuModel));
-
-                      Navigator.pop(context);
+                        Navigator.pop(context);
+                      }
                     },
                     child: Container(
                       width: 384.w,
@@ -85,7 +100,7 @@ class AddBottomSheet extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          'Add Product',
+                          'Create Menu',
                           style: GoogleFonts.inter(
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
