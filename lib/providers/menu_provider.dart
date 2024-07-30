@@ -12,26 +12,26 @@ class MenuProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void toggleAvailability(String id) {
-    var index = _menuItems.indexWhere((item) => item.id == id);
-    if (index != -1) {
-      _menuItems[index].isAvailable = !_menuItems[index].isAvailable;
-      notifyListeners();
-    }
-  }
+  // void toggleAvailability(String id) {
+  //   var index = _menuItems.indexWhere((item) => item.id == id);
+  //   if (index != -1) {
+  //     _menuItems[index].isAvailable = !_menuItems[index].isAvailable;
+  //     notifyListeners();
+  //   }
+  // }
 
   void addItem(MenuItem item) {
     _menuItems.add(item);
     notifyListeners();
   }
 
-  void updateMenuItemAvailability(String id, bool isAvailable) {
-    var index = _menuItems.indexWhere((item) => item.id == id);
-    if (index != -1) {
-      _menuItems[index].isAvailable = isAvailable;
-      notifyListeners();
-    }
-  }
+  // void updateMenuItemAvailability(String id, bool isAvailable) {
+  //   var index = _menuItems.indexWhere((item) => item.id == id);
+  //   if (index != -1) {
+  //     _menuItems[index].isAvailable = isAvailable;
+  //     notifyListeners();
+  //   }
+  // }
 
   void editMenuItem(String id, MenuItem newItem) {
     var index = _menuItems.indexWhere((item) => item.id == id);
