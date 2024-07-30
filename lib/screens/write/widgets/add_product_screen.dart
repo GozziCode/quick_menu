@@ -102,6 +102,9 @@ class _AddNewProductState extends State<AddNewProduct> {
                         text: 'Write to NFC'),
                   ),
                   SizedBox(
+                    height: 20.0,
+                  ),
+                  SizedBox(
                     width: double.infinity,
                     child: ActionButton(
                         onTap: () async {
