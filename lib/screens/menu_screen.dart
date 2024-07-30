@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quick_menu/constant/app_color.dart';
 
@@ -11,9 +12,11 @@ class MenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Menu"),
+        title: const Text("Menu Liat"),
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
+        bottom:
+            PreferredSize(preferredSize: Size(double.infinity, 80.h), child: Container()),
       ),
       body: ListView.separated(
           scrollDirection: Axis.vertical,
@@ -59,8 +62,14 @@ class MenuCategory extends StatelessWidget {
   }
 }
 
-class MenuItem extends StatelessWidget {
+class MenuItem extends StatefulWidget {
   const MenuItem({super.key});
+
+  @override
+  State<MenuItem> createState() => _MenuItemState();
+}
+
+class _MenuItemState extends State<MenuItem> {
   void _showBottomSheet(BuildContext context) {
     showModalBottomSheet(
       backgroundColor: AppColors.bgColor,
@@ -113,8 +122,11 @@ class MenuItem extends StatelessWidget {
         ),
         GestureDetector(
             onTap: () => _showBottomSheet(context),
-            child: SvgPicture.asset(
-              'assets/svgs/edit.svg',
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SvgPicture.asset(
+                'assets/svgs/edit.svg',
+              ),
             ))
       ],
     );
