@@ -29,7 +29,7 @@ class MenuScreen extends StatelessWidget {
           itemBuilder: (context, index) {
             return const MenuCategory();
           },
-          separatorBuilder: (context, int) {
+          separatorBuilder: (context, i) {
             return const Padding(
               padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24),
               child: Divider(),
