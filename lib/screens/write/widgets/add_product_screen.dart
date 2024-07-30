@@ -3,8 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quick_menu/constant/app_color.dart';
 
-import '../components/action_button.dart';
-import 'write/widgets/bottom_sheet.dart';
+import '../../../components/action_button.dart';
+import '../../alert_box.dart';
+import 'widgets/edit_bottom_sheet.dart';
+import 'widgets/edit_form.dart';
 
 class AddNewProduct extends StatefulWidget {
   const AddNewProduct({super.key});
@@ -14,49 +16,71 @@ class AddNewProduct extends StatefulWidget {
 }
 
 class _AddNewProductState extends State<AddNewProduct> {
-  void _showBottomSheet(BuildContext context) {
-    showModalBottomSheet(backgroundColor: AppColors.bgColor,
+  final TextEditingController productNameController = TextEditingController();
+  final TextEditingController categoryController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController priceController = TextEditingController();
+
+  void _showSuccessDialog(BuildContext context) {
+    showDialog(
       context: context,
-      isScrollControlled: true,
-      
       builder: (BuildContext context) {
-        return DraggableScrollableSheet(
-          minChildSize: 0.5, // Minimum height of the sheet (50% of screen height)
-          maxChildSize: 0.8, // Maximum height of the sheet (80% of screen height)
-          initialChildSize: 0.7,
-          expand: false,
-          builder: (_, controller) {
-            return EditBottomSheet(); // Use the bottom sheet widget
-          },
+        return const AlertBox(
+          title: 'Successful',
+          img: 'assets/images/success.png',
+          message: 'Product has been recorded successfully',
         );
       },
     );
   }
+
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.bgColor,
-        title: Text(
-          'Add New Product',
-          style: GoogleFonts.inter(
-            letterSpacing: -0.70,
-            fontSize: 20.sp,
-            fontWeight: FontWeight.w700,
-            color: AppColors.textColor,
-            height: 1.18,
-          ),
-        ),
       ),
-      body: Form(
-        child: Column(
-          children: [
-            Column(
-              children: [const Text('Product Name'), TextFormField()],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: SingleChildScrollView(
+            child: Form(
+              child: Column(
+                children: [
+                  SizedBox(height: 30.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Add New Product',
+                        style: GoogleFonts.inter(
+                            fontSize: 20.sp,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.textColor),
+                      ),
+                    ],
+                  ),
+                  EditForm(
+                      productName: productNameController,
+                      category: categoryController,
+                      description: descriptionController,
+                      price: priceController),
+                  SizedBox(
+                    height: 80.h,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ActionButton(
+                        onTap: () => _showSuccessDialog(context),
+                        // () => _showBottomSheet(context),
+                        text: 'Save Changes'),
+                  )
+                ],
+              ),
             ),
-            ActionButton(onTap: () => _showBottomSheet(context), text: 'Edit')
-          ],
+          ),
         ),
       ),
     );

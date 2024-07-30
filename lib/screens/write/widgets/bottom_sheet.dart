@@ -9,7 +9,6 @@ class EditBottomSheet extends StatelessWidget {
   final TextEditingController field1Controller = TextEditingController();
   final TextEditingController field2Controller = TextEditingController();
   final TextEditingController longTextController = TextEditingController();
-  final TextEditingController priceTextController = TextEditingController();
 
   EditBottomSheet({super.key});
 
@@ -123,7 +122,7 @@ class EditBottomSheet extends StatelessWidget {
                 ),
                 SizedBox(height: 8.h),
                 TextFormField(
-                  controller: priceTextController,
+                  controller: field2Controller,
                   decoration: InputDecoration(
                     suffix: const Text('USD'),
                     hintText: '10.00',
