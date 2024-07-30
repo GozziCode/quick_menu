@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
                   ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
               useMaterial3: true,
             ),
-            home: const SplashScreeen(),
+            home: const SplashScreen(),
           );
         },
       ),

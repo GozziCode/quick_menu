@@ -6,20 +6,18 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quick_menu/screens/onboarding/onboarding.dart';
 import 'package:quick_menu/services/nfc_service.dart';
 
+import 'onboarding/widgets/enable_nfc_screen.dart';
 
-
-class SplashScreeen extends StatefulWidget {
-  const SplashScreeen({super.key});
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
 
   @override
-  State<SplashScreeen> createState() => _SplashScreeenState();
+  State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreeenState extends State<SplashScreeen> {
-  NfcService nfcService = NfcService();
-
+class _SplashScreenState extends State<SplashScreen> {
   Future<void> _checkNfcAndNavigate() async {
-    bool nfcEnabled = await nfcService.isNfcEnabled();
+    bool nfcEnabled = await isNfcAvailable();
 
     Timer(const Duration(seconds: 2), () {
       if (nfcEnabled) {
@@ -31,9 +29,9 @@ class _SplashScreeenState extends State<SplashScreeen> {
       } else {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const OnboardingScreen()
-              // const EnableNfcScreen(),
-              ),
+          MaterialPageRoute(
+            builder: (context) => const EnableNfcScreen(),
+          ),
         );
       }
     });

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:quick_menu/constant/app_color.dart';
 
 import '../../../components/action_button.dart';
+import '../../../models/menu_item.dart';
+import '../../../providers/menu_provider.dart';
+import '../../../services/nfc_service.dart';
 import '../../alert_box.dart';
-import 'widgets/edit_bottom_sheet.dart';
+
 import 'widgets/edit_form.dart';
 
 class AddNewProduct extends StatefulWidget {
@@ -34,10 +38,9 @@ class _AddNewProductState extends State<AddNewProduct> {
     );
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
+    final menuProvider = Provider.of<MenuProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.bgColor,
@@ -73,10 +76,43 @@ class _AddNewProductState extends State<AddNewProduct> {
                   SizedBox(
                     width: double.infinity,
                     child: ActionButton(
-                        onTap: () => _showSuccessDialog(context),
+                        onTap: () async {
+                          final newItem = MenuItem(
+                            id: "0",
+                            name: productNameController.text,
+                            description: descriptionController.text,
+                            price: double.parse(priceController.text),
+                            category: 'Spicy',
+                          );
+                          menuProvider.addItem(newItem);
+
+                          await writeMenuToNfc(newItem);
+                          // _nameController.clear();
+                          // _imageUrlController.clear();
+                          // _descriptionController.clear();
+                          // _priceController.clear();
+                          // await NfcService.writeNfc(
+                          //     context, menuProvider.menuItems);
+
+                          // if (mounted) {
+                          //   _showSuccessDialog(context);
+                          // }
+                        },
                         // () => _showBottomSheet(context),
-                        text: 'Save Changes'),
-                  )
+                        text: 'Write to NFC'),
+                  ),
+                  SizedBox(
+                    height: 20.0,
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ActionButton(
+                        onTap: () async {
+                          await readMenuFromNfc();
+                        },
+                        // () => _showBottomSheet(context),
+                        text: 'Read from NFC'),
+                  ),
                 ],
               ),
             ),
