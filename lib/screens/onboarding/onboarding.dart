@@ -142,13 +142,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   children: [
                     ActionButton(
                         text: 'Read Menu',
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (c) => const MenuScreen(),
-                              ));
-                        },
+                        onTap: () {},
                         icon: const Icon(Icons.arrow_forward_outlined,
                             color: AppColors.iconColor)),
                     SizedBox(width: 10.w),
