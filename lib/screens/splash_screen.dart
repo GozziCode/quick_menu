@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:quick_menu/screens/onboarding/onboarding.dart';
 import 'package:quick_menu/services/nfc_service.dart';
 
-import 'onboarding/widgets/enable_nfc_screen.dart';
+
 
 class SplashScreeen extends StatefulWidget {
   const SplashScreeen({super.key});
@@ -21,7 +21,7 @@ class _SplashScreeenState extends State<SplashScreeen> {
   Future<void> _checkNfcAndNavigate() async {
     bool nfcEnabled = await nfcService.isNfcEnabled();
 
-    Timer(const Duration(seconds: 5), () {
+    Timer(const Duration(seconds: 2), () {
       if (nfcEnabled) {
         Navigator.pushReplacement(
             context,
