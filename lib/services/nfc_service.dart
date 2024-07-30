@@ -1,6 +1,11 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
+import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
+import 'package:flutter_nfc_kit/flutter_nfc_kit.dart';
 import 'package:ndef/ndef.dart' as ndef;
+import 'package:ndef/record.dart';
 import 'dart:convert';
 
 import 'package:provider/provider.dart';
@@ -59,41 +64,104 @@ class NfcService {
 
   static Future<void> writeNfc(
       BuildContext context, List<MenuItem> menuItems) async {
-    var message = [
-      ndef.TextRecord(
-        text: json.encode(menuItems.map((e) => e.toJson()).toList()),
-      ),
-    ];
+    print("Starting writeNfc method");
+    print("Menu items: ${menuItems.length}");
 
     try {
+      print("Checking NFC availability");
       var availability = await FlutterNfcKit.nfcAvailability;
+      print("NFC availability: $availability");
+
       if (availability != NFCAvailability.available) {
+        print("NFC not available");
         if (context.mounted) {
           _showErrorDialog(context, 'NFC is not available');
         }
         return;
       }
 
-      var tag = await FlutterNfcKit.poll(timeout: const Duration(seconds: 10));
-      if (tag.ndefWritable == true) {
-        await FlutterNfcKit.writeNDEFRecords(message);
+      print("Polling for NFC tag");
+      var tag = await FlutterNfcKit.poll(
+        timeout: Duration(seconds: 10),
+        iosAlertMessage: "Hold your device near an NFC tag",
+      );
+      print("NFC tag found: ${jsonEncode(tag)}");
+
+      if (tag.ndefWritable!) {
+        print("Tag is NDEF writable");
+
+        var jsonData = menuItems.map((e) => e.toJson()).toList();
+        var jsonString = json.encode(jsonData);
+        print("JSON string to write: $jsonString");
+
+        // Create NDEF record
+        print("Creating NDEF record");
+        var record = ndef.TextRecord(text: jsonString, language: 'en');
+        print("NDEF record created: $record");
+
+        print("Writing NDEF record");
+        await FlutterNfcKit.writeNDEFRecords([record]);
+
+        print("NDEF record written successfully");
         if (context.mounted) {
           _showSuccessDialog(
               context, 'Menu items successfully written to NFC tag!');
         }
       } else {
+        print("Tag is not NDEF writable");
         if (context.mounted) {
           _showErrorDialog(context, 'NDEF is not writable on this tag');
         }
       }
-    } catch (e) {
+    } catch (e, stackTrace) {
+      print("Error in writeNfc: $e");
+      print("Stack trace: $stackTrace");
       if (context.mounted) {
         _showErrorDialog(context, 'Error writing NFC tag: $e');
       }
     } finally {
-      await FlutterNfcKit.finish();
+      print("Finishing NFC operation");
+      await FlutterNfcKit.finish(iosAlertMessage: "Finished NFC operation");
+      print("NFC operation finished");
     }
   }
+  // static Future<void> writeNfc(
+  //     BuildContext context, List<MenuItem> menuItems) async {
+  //   var message = [
+  //     ndef.TextRecord(
+  //       text: json.encode(menuItems.map((e) => e.toJson()).toList()),
+  //     ),
+  //   ];
+
+  //   try {
+  //     var availability = await FlutterNfcKit.nfcAvailability;
+  //     if (availability != NFCAvailability.available) {
+  //       if (context.mounted) {
+  //         _showErrorDialog(context, 'NFC is not available');
+  //       }
+  //       return;
+  //     }
+
+  //     var tag = await FlutterNfcKit.poll(timeout: const Duration(seconds: 10));
+  //     if (tag.ndefWritable == true) {
+  //       await FlutterNfcKit.writeNDEFRecords(message);
+  //       if (context.mounted) {
+  //         _showSuccessDialog(
+  //             context, 'Menu items successfully written to NFC tag!');
+  //       }
+  //     } else {
+  //       if (context.mounted) {
+  //         _showErrorDialog(context, 'NDEF is not writable on this tag');
+  //       }
+  //     }
+  //   } catch (e) {
+  //     if (context.mounted) {
+  //       _showErrorDialog(context, 'Error writing NFC tag: $e');
+  //     }
+  //   } finally {
+  //     await FlutterNfcKit.finish();
+  //   }
+  // }
 
   static void _showErrorDialog(BuildContext context, String message) {
     if (context.mounted) {

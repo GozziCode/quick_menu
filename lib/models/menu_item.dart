@@ -14,16 +14,6 @@ class MenuItem {
     required this.isAvailable,
   });
 
-  factory MenuItem.fromJson(Map<String, dynamic> json) {
-    return MenuItem(
-      name: json['name'],
-      imageUrl: json['imageUrl'],
-      description: json['description'],
-      price: json['price'].toDouble(),
-      isAvailable: json['isAvailable'],
-    );
-  }
-
   Map<String, dynamic> toJson() {
     return {
       'name': name,
@@ -32,5 +22,15 @@ class MenuItem {
       'price': price,
       'isAvailable': isAvailable,
     };
+  }
+
+  factory MenuItem.fromJson(Map<String, dynamic> json) {
+    return MenuItem(
+      name: json['name'] ?? '',
+      imageUrl: json['imageUrl'] ?? '',
+      description: json['description'] ?? '',
+      price: (json['price'] ?? '').toDouble(),
+      isAvailable: json['isAvailable'] ?? false,
+    );
   }
 }

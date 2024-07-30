@@ -5,6 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quick_menu/onboarding/onboarding.dart';
 
+import 'alertdialog_new.dart';
+import 'write_screen.dart';
+
 class SplashScreeen extends StatefulWidget {
   const SplashScreeen({super.key});
 
@@ -18,12 +21,14 @@ class _SplashScreeenState extends State<SplashScreeen> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (c) => const MyOnboarding(),
-            //const WriteScreen()
+              builder: (c) =>
+                  //const MyALertDialog(),
+                  //const MyOnboarding(),
+                  const WriteScreen()
 
-            // const OnBoardingScreen()
-            // const StartScreen()
-          ));
+              // const OnBoardingScreen()
+              // const StartScreen()
+              ));
     });
   }
 

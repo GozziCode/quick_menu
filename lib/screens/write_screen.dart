@@ -78,6 +78,16 @@ class _WriteScreenState extends State<WriteScreen> {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
+                if (menuProvider.menuItems.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                        content: Text(
+                      "there's no items in the menu",
+                    )),
+                  );
+                  return;
+                }
+                print(menuProvider.menuItems);
                 await NfcService.writeNfc(context, menuProvider.menuItems);
               },
               child: const Text('Write to NFC Tag'),
@@ -88,4 +98,3 @@ class _WriteScreenState extends State<WriteScreen> {
     );
   }
 }
-
