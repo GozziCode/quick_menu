@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quick_menu/constant/app_color.dart';
 
@@ -14,8 +15,8 @@ class MenuScreen extends StatelessWidget {
         title: const Text("Menu List"),
         backgroundColor: AppColors.bgColor,
         surfaceTintColor: Colors.transparent,
-        bottom:
-            PreferredSize(preferredSize: Size(double.infinity, 80.h), child: Container()),
+        bottom: PreferredSize(
+            preferredSize: Size(double.infinity, 80.h), child: Container()),
       ),
       body: ListView.separated(
           scrollDirection: Axis.vertical,
