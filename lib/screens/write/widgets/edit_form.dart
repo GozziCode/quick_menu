@@ -24,7 +24,7 @@ class EditForm extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(height: 25.h),
+        SizedBox(height: 8.h),
         Text(
           'Product Name',
           style: GoogleFonts.inter(
@@ -34,7 +34,7 @@ class EditForm extends StatelessWidget {
         ),
         SizedBox(height: 8.h),
         Container(
-           height: 48.h,
+          height: 48.h,
           decoration: BoxDecoration(
               border: Border.all(color: AppColors.lightGrey),
               borderRadius: BorderRadius.circular(8)),
@@ -54,18 +54,53 @@ class EditForm extends StatelessWidget {
               color: AppColors.textColor),
         ),
         SizedBox(height: 8.h),
-        Container(
-          height: 48.h,
-          decoration: BoxDecoration(
-              border: Border.all(color: AppColors.lightGrey),
-              borderRadius: BorderRadius.circular(8)),
-          child: TextFormField(
-            controller: category,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(borderSide: BorderSide.none),
-            ),
+        DropdownButtonFormField(
+          items: [
+            "Appetizers",
+            "Main Course",
+            "Salad & Soup",
+            "Desserts",
+            "Drinks"
+          ].map((String category) {
+            return DropdownMenuItem(
+              value: category,
+              child: Text(category),
+            );
+          }).toList(),
+          onChanged: (newValue) {
+            category.text = newValue!;
+          },
+          dropdownColor: AppColors.white,
+          decoration: InputDecoration(
+            constraints: BoxConstraints(maxHeight: 48.h),
+            contentPadding: EdgeInsets.fromLTRB(12.0, 0, 12.0, 0),
+            focusColor: AppColors.lightGrey,
+            filled: true,
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+                borderSide: BorderSide(color: AppColors.lightGrey)),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+                borderSide: BorderSide(color: AppColors.lightGrey)),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8.0),
+                borderSide: BorderSide(color: AppColors.lightGrey)),
+            fillColor: Colors.white,
+            hintText: category.text,
           ),
         ),
+        // Container(
+        //   height: 48.h,
+        //   decoration: BoxDecoration(
+        //       border: Border.all(color: AppColors.lightGrey),
+        //       borderRadius: BorderRadius.circular(8)),
+        //   child: TextFormField(
+        //     controller: category,
+        //     decoration: const InputDecoration(
+        //       border: OutlineInputBorder(borderSide: BorderSide.none),
+        //     ),
+        //   ),
+        // ),
         SizedBox(height: 15.h),
         Text(
           'Product Description',
@@ -97,7 +132,7 @@ class EditForm extends StatelessWidget {
         ),
         SizedBox(height: 8.h),
         Container(
-           height: 48.h,
+          height: 48.h,
           decoration: BoxDecoration(
               border: Border.all(color: AppColors.lightGrey),
               borderRadius: BorderRadius.circular(8)),

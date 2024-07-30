@@ -3,14 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:quick_menu/constant/app_color.dart';
+import 'package:quick_menu/screens/write/widgets/edit_form.dart';
 
-import '../../../components/action_button.dart';
-import '../../../models/menu_item.dart';
-import '../../../providers/menu_provider.dart';
-import '../../../services/nfc_service.dart';
-import '../../alert_box.dart';
-
-import 'widgets/edit_form.dart';
+import '../../components/action_button.dart';
+import '../../models/menu_model.dart';
+import '../../providers/menu_provider.dart';
+import '../../services/nfc_service.dart';
+import '../alert_box.dart';
 
 class AddNewProduct extends StatefulWidget {
   const AddNewProduct({super.key});
@@ -77,16 +76,15 @@ class _AddNewProductState extends State<AddNewProduct> {
                     width: double.infinity,
                     child: ActionButton(
                         onTap: () async {
-                          final newItem = MenuItem(
-                            id: "0",
+                          final newItem = MenuModel(
                             name: productNameController.text,
                             description: descriptionController.text,
                             price: double.parse(priceController.text),
                             category: categoryController.text,
                           );
-                          menuProvider.addItem(newItem);
-
-                          await writeMenuToNfc(newItem);
+                          // menuProvider.addItem(newItem);
+                          //
+                          // await writeMenuToNfc(newItem);
                           // _nameController.clear();
                           // _imageUrlController.clear();
                           // _descriptionController.clear();
@@ -126,7 +124,7 @@ class _AddNewProductState extends State<AddNewProduct> {
 // // lib/admin_view.dart
 // import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';
-// import '../models/menu_item.dart';
+// import '../models/menu_model.dart';
 // import '../providers/menu_provider.dart';
 // import '../services/nfc_service.dart';
 
