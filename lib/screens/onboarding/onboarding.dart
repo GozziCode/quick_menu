@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:quick_menu/screens/write_screen.dart';
+import 'package:quick_menu/screens/write/widgets/write_screen.dart';
 
 import '../../components/action_button.dart';
 import '../../constant/app_color.dart';

@@ -1,8 +1,8 @@
 // lib/customer_view.dart
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../providers/menu_provider.dart';
-import '../services/nfc_service.dart';
+import '../../../providers/menu_provider.dart';
+import '../../../services/nfc_service.dart';
 
 
 class CustomerView extends StatelessWidget {

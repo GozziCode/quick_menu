@@ -56,10 +56,9 @@ class _SplashScreeenState extends State<SplashScreeen> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: 150.h),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+            SizedBox(height: 150.h),
             SizedBox(
               height: 123.63.h,
               width: 181.33.w,
