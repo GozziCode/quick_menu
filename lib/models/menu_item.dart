@@ -17,17 +17,17 @@ class MenuItem {
     required this.category,
   });
 
-  factory MenuItem.fromJson(Map<String, dynamic> json) {
-    return MenuItem(
-      id: json['id'],
-      name: json['name'],
-      imageUrl: json['imageUrl'],
-      description: json['description'],
-      price: json['price'].toDouble(),
-      isAvailable: json['isAvailable'],
-      category: json['category'],
-    );
-  }
+  // factory MenuItem.fromJson(Map<String, dynamic> json) {
+  //   return MenuItem(
+  //     id: json['id'],
+  //     name: json['name'],
+  //     imageUrl: json['imageUrl'],
+  //     description: json['description'],
+  //     price: json['price'].toDouble(),
+  //     isAvailable: json['isAvailable'],
+  //     category: json['category'],
+  //   );
+  // }
 
   Map<String, dynamic> toJson() {
     return {
@@ -43,11 +43,13 @@ class MenuItem {
 
   factory MenuItem.fromJson(Map<String, dynamic> json) {
     return MenuItem(
+      id: json['id'] ?? '',
       name: json['name'] ?? '',
       imageUrl: json['imageUrl'] ?? '',
       description: json['description'] ?? '',
       price: (json['price'] ?? '').toDouble(),
       isAvailable: json['isAvailable'] ?? false,
+      category: json['category'] ?? '',
     );
   }
 }
