@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:quick_menu/models/menu_item.dart';
 
@@ -13,7 +13,7 @@ Future<void> writeMenuToNfc(MenuItem menuItem) async {
   bool isAvailable = await NfcManager.instance.isAvailable();
 
   if (!isAvailable) {
-    print('NFC is not available on this device');
+    debugPrint('NFC is not available on this device');
     return;
   }
 
@@ -24,7 +24,7 @@ Future<void> writeMenuToNfc(MenuItem menuItem) async {
     var ndef = Ndef.from(tag);
 
     if (ndef == null) {
-      print('Tag is not NDEF compatible');
+      debugPrint('Tag is not NDEF compatible');
       return;
     }
 
@@ -37,9 +37,9 @@ Future<void> writeMenuToNfc(MenuItem menuItem) async {
 
     try {
       await ndef.write(message);
-      print('MenuItem written successfully to NFC tag');
+      debugPrint('MenuItem written successfully to NFC tag');
     } catch (e) {
-      print('Error writing to NFC: $e');
+      debugPrint('Error writing to NFC: $e');
     } finally {
       NfcManager.instance.stopSession();
     }
@@ -50,7 +50,7 @@ Future<MenuItem?> readMenuFromNfc() async {
   bool isAvailable = await NfcManager.instance.isAvailable();
 
   if (!isAvailable) {
-    print('NFC is not available on this device');
+    debugPrint('NFC is not available on this device');
     return null;
   }
 
@@ -77,7 +77,7 @@ Future<MenuItem?> readMenuFromNfc() async {
             price: json['price'],
             category: json['category'],
           );
-          print(menuItem);
+          debugPrint(menuItem.toString());
           completer.complete(menuItem);
           return;
         }

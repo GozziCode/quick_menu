@@ -82,7 +82,7 @@ class _AddNewProductState extends State<AddNewProduct> {
                             name: productNameController.text,
                             description: descriptionController.text,
                             price: double.parse(priceController.text),
-                            category: 'Spicy',
+                            category: categoryController.text,
                           );
                           menuProvider.addItem(newItem);
 
@@ -101,7 +101,7 @@ class _AddNewProductState extends State<AddNewProduct> {
                         // () => _showBottomSheet(context),
                         text: 'Write to NFC'),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20.0,
                   ),
                   SizedBox(

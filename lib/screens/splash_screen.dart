@@ -30,7 +30,8 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => const EnableNfcScreen(),
+            builder: (context) => OnboardingScreen()
+            //  const EnableNfcScreen(),
           ),
         );
       }

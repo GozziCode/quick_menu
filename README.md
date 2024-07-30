@@ -1,4 +1,4 @@
-# HNG Mobile Dev: Stage Five Task  - Quick Menu
+# HNG Mobile Dev: Stage Five Task  - Quick Menu by Kimiko's Place
 
 ---
 ![alt text](/gitfiles/screenshot1.png)
