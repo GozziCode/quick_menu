@@ -6,6 +6,7 @@ import 'package:quick_menu/constant/app_color.dart';
 import '../../../components/action_button.dart';
 import '../../alert_box.dart';
 import 'widgets/edit_bottom_sheet.dart';
+import 'widgets/edit_form.dart';
 
 class AddNewProduct extends StatefulWidget {
   const AddNewProduct({super.key});
@@ -33,28 +34,14 @@ class _AddNewProductState extends State<AddNewProduct> {
     );
   }
 
-  void _showBottomSheet(BuildContext context) {
-    showModalBottomSheet(
-      backgroundColor: AppColors.bgColor,
-      context: context,
-      isScrollControlled: true,
-      builder: (BuildContext context) {
-        return DraggableScrollableSheet(
-          minChildSize: 0.5,
-          maxChildSize: 0.8,
-          initialChildSize: 0.7,
-          expand: false,
-          builder: (_, controller) {
-            return EditBottomSheet();
-          },
-        );
-      },
-    );
-  }
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.bgColor,
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),

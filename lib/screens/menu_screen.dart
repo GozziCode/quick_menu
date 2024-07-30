@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quick_menu/constant/app_color.dart';
+
+import 'write/widgets/widgets/edit_bottom_sheet.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
@@ -58,12 +61,30 @@ class MenuCategory extends StatelessWidget {
 
 class MenuItem extends StatelessWidget {
   const MenuItem({super.key});
+  void _showBottomSheet(BuildContext context) {
+    showModalBottomSheet(
+      backgroundColor: AppColors.bgColor,
+      context: context,
+      isScrollControlled: true,
+      builder: (BuildContext context) {
+        return DraggableScrollableSheet(
+          minChildSize: 0.5,
+          maxChildSize: 0.8,
+          initialChildSize: 0.7,
+          expand: false,
+          builder: (_, controller) {
+            return EditBottomSheet();
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    return const Row(
+    return Row(
       children: [
-        Expanded(
+        const Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -90,10 +111,11 @@ class MenuItem extends StatelessWidget {
             ],
           ),
         ),
-        Icon(
-          Icons.arrow_forward_ios_rounded,
-          color: Colors.grey,
-        )
+        GestureDetector(
+            onTap: () => _showBottomSheet(context),
+            child: SvgPicture.asset(
+              'assets/svgs/edit.svg',
+            ))
       ],
     );
   }
