@@ -28,6 +28,7 @@ class MyApp extends StatelessWidget {
             title: 'Quick Menu',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
+              scaffoldBackgroundColor: AppColors.bgColor,
               colorScheme:
                   ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
               useMaterial3: true,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../components/container1.dart';
+
 
 class ReadNfcScreen extends StatelessWidget {
   const ReadNfcScreen({super.key});
@@ -57,11 +57,12 @@ class ReadNfcScreen extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsets.only(top: 22.0.h),
-                        child: MyContainer1(
-                            text: 'Connect',
-                            onTap: () {
-                              //connect to tag
-                            }),
+                        // child:
+                        //  MyContainer1(
+                        //     text: 'Connect',
+                        //     onTap: () {
+                        //       //connect to tag
+                        //     }),
                       )
                     ],
                   ),
