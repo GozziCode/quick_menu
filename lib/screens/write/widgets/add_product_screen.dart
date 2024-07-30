@@ -78,24 +78,38 @@ class _AddNewProductState extends State<AddNewProduct> {
                     child: ActionButton(
                         onTap: () async {
                           final newItem = MenuItem(
+                            id: "0",
                             name: productNameController.text,
                             description: descriptionController.text,
                             price: double.parse(priceController.text),
-                            category: '',
+                            category: 'Spicy',
                           );
                           menuProvider.addItem(newItem);
+
+                          await writeMenuToNfc(newItem);
                           // _nameController.clear();
                           // _imageUrlController.clear();
                           // _descriptionController.clear();
                           // _priceController.clear();
-                          await NfcService.writeNfc(
-                              context, menuProvider.menuItems);
+                          // await NfcService.writeNfc(
+                          //     context, menuProvider.menuItems);
 
-                          _showSuccessDialog(context);
+                          // if (mounted) {
+                          //   _showSuccessDialog(context);
+                          // }
                         },
                         // () => _showBottomSheet(context),
-                        text: 'Save Changes'),
-                  )
+                        text: 'Write to NFC'),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ActionButton(
+                        onTap: () async {
+                          await readMenuFromNfc();
+                        },
+                        // () => _showBottomSheet(context),
+                        text: 'Read from NFC'),
+                  ),
                 ],
               ),
             ),
