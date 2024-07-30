@@ -32,9 +32,8 @@ Future<String> writeMenuToNfc(Menu menu) async {
     }
 
     NdefMessage message = NdefMessage([
-      NdefRecord.createMime(
-        'application/json',
-        Uint8List.fromList(utf8.encode(jsonMenuItem)),
+      NdefRecord.createText(
+        jsonMenuItem,
       ),
     ]);
 
@@ -71,12 +70,19 @@ Future<Menu?> readMenuFromNfc() async {
 
     try {
       var records = await ndef.read();
+
       for (NdefRecord record in records.records) {
         if (record.typeNameFormat == NdefTypeNameFormat.nfcWellknown) {
-          String jsonString = String.fromCharCodes(record.payload);
+          // String jsonString = String.fromCharCodes(record.payload);
+          //print(jsonString);
+          String tryString = String.fromCharCodes(record.payload);
+          String jsonString = tryString.substring(tryString.indexOf('{'));
           Map<String, dynamic> json = jsonDecode(jsonString);
+          //print(json);
           Menu menu = Menu.fromJson(json);
+
           completer.complete(menu);
+
           return;
         }
       }
