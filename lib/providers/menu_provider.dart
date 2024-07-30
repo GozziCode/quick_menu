@@ -1,54 +1,53 @@
-
 import 'package:flutter/material.dart';
-import '../models/menu_item.dart';
+import '../models/menu_model.dart';
 
 class MenuProvider with ChangeNotifier {
-  List<MenuItem> _menuItems = [];
+  List<MenuModel> _MenuModels = [];
 
-  List<MenuItem> get menuItems => _menuItems;
+  List<MenuModel> get MenuModels => _MenuModels;
 
-  void setMenuItems(List<MenuItem> items) {
-    _menuItems = items;
+  void setMenuModels(List<MenuModel> items) {
+    _MenuModels = items;
     notifyListeners();
   }
 
   // void toggleAvailability(String id) {
-  //   var index = _menuItems.indexWhere((item) => item.id == id);
+  //   var index = _MenuModels.indexWhere((item) => item.id == id);
   //   if (index != -1) {
-  //     _menuItems[index].isAvailable = !_menuItems[index].isAvailable;
+  //     _MenuModels[index].isAvailable = !_MenuModels[index].isAvailable;
   //     notifyListeners();
   //   }
   // }
 
-  void addItem(MenuItem item) {
-    _menuItems.add(item);
+  void addItem(MenuModel item) {
+    _MenuModels.add(item);
     notifyListeners();
   }
 
-  // void updateMenuItemAvailability(String id, bool isAvailable) {
-  //   var index = _menuItems.indexWhere((item) => item.id == id);
+  // void updateMenuModelAvailability(String id, bool isAvailable) {
+  //   var index = _MenuModels.indexWhere((item) => item.id == id);
   //   if (index != -1) {
-  //     _menuItems[index].isAvailable = isAvailable;
+  //     _MenuModels[index].isAvailable = isAvailable;
   //     notifyListeners();
   //   }
   // }
 
-  void editMenuItem(String id, MenuItem newItem) {
-    var index = _menuItems.indexWhere((item) => item.id == id);
+  void editMenuModel(String id, MenuModel newItem) {
+    var index = _MenuModels.indexWhere((item) => item == id);
     if (index != -1) {
-      _menuItems[index] = newItem;
+      _MenuModels[index] = newItem;
       notifyListeners();
     }
   }
 
-  void deleteMenuItem(String id) {
-    _menuItems.removeWhere((item) => item.id == id);
+  void deleteMenuModel(String id) {
+    _MenuModels.removeWhere((item) => item == id);
     notifyListeners();
   }
 
-  Map<String, List<MenuItem>> get menuItemsByCategory {
-    Map<String, List<MenuItem>> itemsByCategory = {};
-    for (var item in _menuItems) {
+  Map<String, List<MenuModel>> get MenuModelsByCategory {
+    Map<String, List<MenuModel>> itemsByCategory = {};
+    for (var item in _MenuModels) {
       if (!itemsByCategory.containsKey(item.category)) {
         itemsByCategory[item.category] = [];
       }

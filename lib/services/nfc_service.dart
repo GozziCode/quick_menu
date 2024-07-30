@@ -3,13 +3,13 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:nfc_manager/nfc_manager.dart';
-import 'package:quick_menu/models/menu_item.dart';
+import 'package:quick_menu/models/menu_model.dart';
 
 Future<bool> isNfcAvailable() async {
   return await NfcManager.instance.isAvailable();
 }
 
-Future<void> writeMenuToNfc(MenuItem menuItem) async {
+Future<void> writeMenuToNfc(MenuModel menuModel) async {
   bool isAvailable = await NfcManager.instance.isAvailable();
 
   if (!isAvailable) {
@@ -18,7 +18,7 @@ Future<void> writeMenuToNfc(MenuItem menuItem) async {
   }
 
   // Serialize the MenuItem to JSON
-  String jsonMenuItem = jsonEncode(menuItem.toJson());
+  String jsonMenuItem = jsonEncode(menuModel.toJson());
 
   NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
     var ndef = Ndef.from(tag);
@@ -46,7 +46,7 @@ Future<void> writeMenuToNfc(MenuItem menuItem) async {
   });
 }
 
-Future<MenuItem?> readMenuFromNfc() async {
+Future<MenuModel?> readMenuFromNfc() async {
   bool isAvailable = await NfcManager.instance.isAvailable();
 
   if (!isAvailable) {
@@ -54,7 +54,7 @@ Future<MenuItem?> readMenuFromNfc() async {
     return null;
   }
 
-  Completer<MenuItem?> completer = Completer<MenuItem?>();
+  Completer<MenuModel?> completer = Completer<MenuModel?>();
 
   NfcManager.instance.startSession(onDiscovered: (NfcTag tag) async {
     var ndef = Ndef.from(tag);
@@ -70,8 +70,7 @@ Future<MenuItem?> readMenuFromNfc() async {
         if (record.typeNameFormat == NdefTypeNameFormat.nfcWellknown) {
           String jsonString = String.fromCharCodes(record.payload);
           Map<String, dynamic> json = jsonDecode(jsonString);
-          MenuItem menuItem = MenuItem(
-            id: json['id'],
+          MenuModel menuItem = MenuModel(
             name: json['name'],
             description: json['description'],
             price: json['price'],

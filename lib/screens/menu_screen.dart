@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:quick_menu/constant/app_color.dart';
 
+import '../models/menu_model.dart';
 import 'write/widgets/widgets/edit_bottom_sheet.dart';
 
 class MenuScreen extends StatelessWidget {
-  const MenuScreen({super.key});
+  final Menu menu;
+
+  const MenuScreen({super.key, required this.menu});
 
   @override
   Widget build(BuildContext context) {
@@ -14,26 +17,31 @@ class MenuScreen extends StatelessWidget {
         title: const Text("Menu List"),
         backgroundColor: AppColors.bgColor,
         surfaceTintColor: Colors.transparent,
-
       ),
       body: ListView.separated(
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {
-            return const MenuCategory();
+            String categoryName = menu.categories[index];
+            List<MenuModel>? categoryItems = menu.map[categoryName];
+            return MenuCategory(
+              categoryList: categoryItems!,
+            );
           },
-          separatorBuilder: (context, int) {
+          separatorBuilder: (context, index) {
             return const Padding(
               padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24),
               child: Divider(),
             );
           },
-          itemCount: 3),
+          itemCount: menu.categories.length),
     );
   }
 }
 
 class MenuCategory extends StatelessWidget {
-  const MenuCategory({super.key});
+  final List<MenuModel> categoryList;
+
+  const MenuCategory({super.key, required this.categoryList});
 
   @override
   Widget build(BuildContext context) {

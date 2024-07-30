@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quick_menu/screens/menu_screen.dart';
+import 'package:quick_menu/screens/option_bridge.dart';
 import 'package:quick_menu/screens/write/widgets/add_product_screen.dart';
 
 import '../../components/action_button.dart';
@@ -138,43 +139,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: Row(
-                  children: [
-                    ActionButton(
-                        text: 'Read Menu',
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => const MenuScreen()));
-                        },
-                        icon: const Icon(Icons.arrow_forward_outlined,
-                            color: AppColors.iconColor)),
-                    SizedBox(width: 10.w),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (c) => const AddNewProduct(),
-                            ));
-                      },
-                      child: Container(
-                          width: 83.w,
-                          height: 52.h,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              width: 1,
-                              color: AppColors.borderColor,
-                            ),
-                          ),
-                          child: const Icon(Icons.add_circle_outline_rounded,
-                              color: AppColors.iconColor)),
-                    ),
-                  ],
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                ),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ActionButton(
+                    text: 'Get Started',
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => const OptionBridge()));
+                    },
+                  ),
                 ),
               ),
-              SizedBox(height: 15.h)
+              SizedBox(height: 20.h)
             ],
           ),
         ],
@@ -182,3 +161,27 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 }
+
+//
+// SizedBox(width: 10.w),
+// GestureDetector(
+// onTap: () {
+// Navigator.push(
+// context,
+// MaterialPageRoute(
+// builder: (c) => const AddNewProduct(),
+// ));
+// },
+// child: Container(
+// width: 83.w,
+// height: 52.h,
+// decoration: BoxDecoration(
+// borderRadius: BorderRadius.circular(8),
+// border: Border.all(
+// width: 1,
+// color: AppColors.borderColor,
+// ),
+// ),
+// child: const Icon(Icons.add_circle_outline_rounded,
+// color: AppColors.iconColor)),
+// ),

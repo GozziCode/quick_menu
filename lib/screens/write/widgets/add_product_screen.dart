@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:quick_menu/constant/app_color.dart';
 
 import '../../../components/action_button.dart';
-import '../../../models/menu_item.dart';
+import '../../../models/menu_model.dart';
 import '../../../providers/menu_provider.dart';
 import '../../../services/nfc_service.dart';
 import '../../alert_box.dart';
@@ -77,8 +77,7 @@ class _AddNewProductState extends State<AddNewProduct> {
                     width: double.infinity,
                     child: ActionButton(
                         onTap: () async {
-                          final newItem = MenuItem(
-                            id: "0",
+                          final newItem = MenuModel(
                             name: productNameController.text,
                             description: descriptionController.text,
                             price: double.parse(priceController.text),
@@ -123,7 +122,7 @@ class _AddNewProductState extends State<AddNewProduct> {
 // // lib/admin_view.dart
 // import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';
-// import '../models/menu_item.dart';
+// import '../models/menu_model.dart';
 // import '../providers/menu_provider.dart';
 // import '../services/nfc_service.dart';
 
