@@ -6,8 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../constant/app_color.dart';
 import '../../../models/menu_model.dart';
-import '../bloc/menu_bloc.dart';
-import '../bloc/menu_event.dart';
+
+import '../bloc/model/menu_bloc.dart';
+import '../bloc/model/menu_event.dart';
 import 'edit_form.dart';
 
 class AddBottomSheet extends StatelessWidget {
@@ -70,9 +71,10 @@ class AddBottomSheet extends StatelessWidget {
                           description: descriptionController.text,
                           price: double.parse(priceController.text),
                           category: categoryController.text);
-                      //TODO: What happens when there is an error
-                      context.read<MenuBloc>().add(EditMenuModel(menuTitle,
-                          null, categoryController.text, newMenuModel));
+
+                      context.read<MenuModelBloc>().add(
+                          AddMenuItem(newMenuModel, newMenuModel.category));
+
                       Navigator.pop(context);
                     },
                     child: Container(
@@ -95,7 +97,7 @@ class AddBottomSheet extends StatelessWidget {
                       ),
                     ),
                   ),
-                ),
+                )
               ],
             ),
           ),

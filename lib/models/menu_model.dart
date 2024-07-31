@@ -47,6 +47,19 @@ class Menu extends Equatable {
       required this.dateTime,
       required this.title});
 
+  Menu copyWith({
+    String? title,
+    List<String>? categories,
+    Map<String, List<MenuModel>>? map,
+  }) {
+    return Menu(
+      title: title ?? this.title,
+      categories: categories ?? List.from(this.categories),
+      map: map ?? Map.from(this.map),
+      dateTime: DateTime.now(),
+    );
+  }
+
   @override
   List<Object?> get props => [title, map, categories, dateTime];
 

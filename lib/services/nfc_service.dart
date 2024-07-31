@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:typed_data';
 
-import 'package:flutter/foundation.dart';
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:quick_menu/models/menu_model.dart';
 
@@ -14,7 +14,7 @@ Future<String> writeMenuToNfc(Menu menu) async {
   bool isAvailable = await NfcManager.instance.isAvailable();
 
   if (!isAvailable) {
-    debugPrint('NFC is not available on this device');
+    print('NFC is not available on this device');
     status = "not available";
     return status;
   }
@@ -26,7 +26,7 @@ Future<String> writeMenuToNfc(Menu menu) async {
     var ndef = Ndef.from(tag);
 
     if (ndef == null) {
-      debugPrint('Tag is not NDEF compatible');
+      print('Tag is not NDEF compatible');
       status = "tag not compatible";
       return;
     }
@@ -39,10 +39,10 @@ Future<String> writeMenuToNfc(Menu menu) async {
 
     try {
       await ndef.write(message);
-      debugPrint('MenuItem written successfully to NFC tag');
+      print('MenuItem written successfully to NFC tag');
       status = "MenuItem written successfully to NFC tag";
     } catch (e) {
-      debugPrint('Error writing to NFC: $e');
+      print('Error writing to NFC: $e');
     } finally {
       NfcManager.instance.stopSession();
     }
@@ -54,7 +54,7 @@ Future<Menu?> readMenuFromNfc() async {
   bool isAvailable = await NfcManager.instance.isAvailable();
 
   if (!isAvailable) {
-    debugPrint('NFC is not available on this device');
+    print('NFC is not available on this device');
     return null;
   }
 
@@ -70,18 +70,13 @@ Future<Menu?> readMenuFromNfc() async {
 
     try {
       var records = await ndef.read();
-
       for (NdefRecord record in records.records) {
         if (record.typeNameFormat == NdefTypeNameFormat.nfcWellknown) {
-         
           String tryString = String.fromCharCodes(record.payload);
-          String jsonString = tryString.substring(tryString.indexOf('{'));
+          String jsonString = tryString.substring(tryString.indexOf("{"));
           Map<String, dynamic> json = jsonDecode(jsonString);
-          
           Menu menu = Menu.fromJson(json);
-
           completer.complete(menu);
-
           return;
         }
       }

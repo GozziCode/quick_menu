@@ -6,8 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../constant/app_color.dart';
 import '../../../models/menu_model.dart';
-import '../bloc/menu_bloc.dart';
-import '../bloc/menu_event.dart';
+
+import '../bloc/model/menu_bloc.dart';
+import '../bloc/model/menu_event.dart';
 import 'edit_form.dart';
 
 class EditBottomSheet extends StatelessWidget {
@@ -68,14 +69,14 @@ class EditBottomSheet extends StatelessWidget {
                 Center(
                   child: GestureDetector(
                     onTap: () {
+                      print(categoryController.text);
                       MenuModel newMenuModel = MenuModel(
-                          name: menuModel.name,
+                          name: productNameController.text,
                           description: descriptionController.text,
                           price: double.parse(priceController.text),
                           category: categoryController.text);
-
-                      context.read<MenuBloc>().add(EditMenuModel(menuTitle,
-                          menuModel, categoryController.text, newMenuModel));
+                      context.read<MenuModelBloc>().add(EditMenuItem(
+                          menuModel, newMenuModel, menuModel.category));
                       Navigator.pop(context);
                     },
                     child: Container(

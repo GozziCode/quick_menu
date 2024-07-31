@@ -1,52 +1,63 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:quick_menu/screens/write/bloc/menu_bloc.dart';
-
-import 'package:quick_menu/screens/write/bloc/menu_state.dart';
+import 'package:quick_menu/screens/write/bloc/model/menu_bloc.dart';
+import 'package:quick_menu/screens/write/bloc/model/menu_state.dart';
 import 'package:quick_menu/screens/write/widgets/add_bottom_sheet.dart';
 import 'package:quick_menu/screens/write/widgets/edit_bottom_sheet.dart';
 
 import '../../constant/app_color.dart';
 import '../../models/menu_model.dart';
 
-class EditCollectionScreen extends StatefulWidget {
-  final int index;
+class EditCollectionScreen extends StatelessWidget {
+  final Menu menu;
 
-  const EditCollectionScreen({super.key, required this.index});
+  const EditCollectionScreen({super.key, required this.menu});
 
-  @override
-  State<EditCollectionScreen> createState() => _EditCollectionScreenState();
-}
-
-class _EditCollectionScreenState extends State<EditCollectionScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MenuBloc, MenuState>(builder: (context, state) {
-      Menu menu = state.menus[widget.index];
+    return BlocBuilder<MenuModelBloc, MenuModelState>(
+        builder: (context, state) {
       return Scaffold(
         appBar: AppBar(
           title: Text(
-            menu.title,
-            style: GoogleFonts.inter(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.w600,
-              color: AppColors.textColor,
-            ),
+            state.menu.title,
+            style: TextStyle(fontWeight: FontWeight.w600),
           ),
-          backgroundColor: AppColors.bgColor,
+          backgroundColor: AppColors.white,
           surfaceTintColor: Colors.transparent,
           actions: [
-            IconButton(
-                onPressed: () {}, icon: const Icon(CupertinoIcons.delete))
+            IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.delete))
           ],
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            _showAddBottomSheet(context, menu.title);
+            showModalBottomSheet(
+              backgroundColor: AppColors.bgColor,
+              context: context,
+              isScrollControlled: true,
+              useSafeArea: true,
+              builder: (BuildContext _) {
+                return DraggableScrollableSheet(
+                  minChildSize: 0.5,
+                  maxChildSize: 0.9,
+                  initialChildSize: 0.8,
+                  snap: true,
+                  expand: false,
+                  builder: (_, controller) {
+                    return BlocProvider.value(
+                      value: BlocProvider.of<MenuModelBloc>(context),
+                      child: AddBottomSheet(
+                        menuTitle: state.menu.title,
+                      ),
+                    );
+                  },
+                );
+              },
+            );
           },
           backgroundColor: AppColors.primaryColor,
           shape: const OvalBorder(),
@@ -59,12 +70,12 @@ class _EditCollectionScreenState extends State<EditCollectionScreen> {
         body: ListView.separated(
             scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {
-              String categoryName = menu.categories[index];
-              List<MenuModel>? categoryItems = menu.map[categoryName];
+              String categoryName = state.menu.categories[index];
+              List<MenuModel>? categoryItems = state.menu.map[categoryName];
               return _MenuCategory(
                 categoryList: categoryItems!,
                 category: categoryName,
-                title: menu.title,
+                title: state.menu.title,
               );
             },
             separatorBuilder: (context, index) {
@@ -73,7 +84,7 @@ class _EditCollectionScreenState extends State<EditCollectionScreen> {
                 child: Divider(),
               );
             },
-            itemCount: menu.categories.length),
+            itemCount: state.menu.categories.length),
       );
     });
   }
@@ -98,7 +109,7 @@ class _MenuCategory extends StatelessWidget {
           children: [
             Text(
               category,
-              style: const TextStyle(
+              style: TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                   color: AppColors.primaryColor),
@@ -126,52 +137,77 @@ class _MenuItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4.0),
-                child: Text(
-                  menuModel.name,
-                  style: const TextStyle(
-                      fontSize: 16.0, fontWeight: FontWeight.bold),
-                ),
-              ),
-              Text(
-                menuModel.description,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 2,
-                style: const TextStyle(
-                  fontSize: 14.0,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Text(
-                  "\$${menuModel.price.toStringAsFixed(2)}",
-                  style: GoogleFonts.inter(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.textColor,
+    return BlocBuilder<MenuModelBloc, MenuModelState>(
+        builder: (context, state) {
+      return Row(
+        children: [
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 4.0),
+                  child: Text(
+                    menuModel.name,
+                    style:
+                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                   ),
                 ),
-              ),
-            ],
+                Text(
+                  menuModel.description,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: TextStyle(
+                    fontSize: 14.0,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    "\$${menuModel.price.toStringAsFixed(2)}",
+                    style:
+                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        GestureDetector(
-            onTap: () => _showEditBottomSheet(context, menuModel, title),
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SvgPicture.asset(
-                'assets/svgs/edit.svg',
-              ),
-            ))
-      ],
-    );
+          GestureDetector(
+              onTap: () {
+                showModalBottomSheet(
+                  backgroundColor: AppColors.bgColor,
+                  context: context,
+                  isScrollControlled: true,
+                  useSafeArea: true,
+                  builder: (BuildContext _) {
+                    return DraggableScrollableSheet(
+                      minChildSize: 0.5,
+                      maxChildSize: 0.9,
+                      initialChildSize: 0.8,
+                      snap: true,
+                      expand: false,
+                      builder: (_, controller) {
+                        return BlocProvider.value(
+                          value: BlocProvider.of<MenuModelBloc>(context),
+                          child: EditBottomSheet(
+                            menuModel: menuModel,
+                            menuTitle: title,
+                          ),
+                        );
+                      },
+                    );
+                  },
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SvgPicture.asset(
+                  'assets/svgs/edit.svg',
+                ),
+              ))
+        ],
+      );
+    });
   }
 }
 
@@ -206,14 +242,14 @@ void _showAddBottomSheet(BuildContext context, String title) {
     context: context,
     isScrollControlled: true,
     useSafeArea: true,
-    builder: (BuildContext context) {
+    builder: (BuildContext context2) {
       return DraggableScrollableSheet(
         minChildSize: 0.5,
         maxChildSize: 0.9,
         initialChildSize: 0.8,
         snap: true,
         expand: false,
-        builder: (_, controller) {
+        builder: (context, controller) {
           return AddBottomSheet(
             menuTitle: title,
           );
