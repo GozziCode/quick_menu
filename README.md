@@ -19,7 +19,7 @@
 - [Mobile Architecture](#mobile-architecture)
 - [Future Improvements](#future-improvements)
 - [APK Download](#apk-download)
-- [Appitize Link](#appitize-link)
+- [Live Demo Link](#live-demo-link)
 - [Author](#authors)
 - [Contributing](#contributing)
 - [License](#license)
