@@ -5,7 +5,6 @@ import 'package:quick_menu/constant/app_color.dart';
 
 import '../../models/menu_model.dart';
 import '../../services/nfc_service.dart';
-import '../menu_screen.dart';
 
 class WritingScreen extends StatefulWidget {
   final Menu menu;

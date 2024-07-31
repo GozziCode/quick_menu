@@ -3,7 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:quick_menu/screens/write/bloc/menu_bloc.dart';
+import 'package:quick_menu/screens/write/bloc/list/menu_bloc.dart';
+import 'package:quick_menu/screens/write/bloc/model/menu_bloc.dart';
 
 import 'constant/app_color.dart';
 import 'providers/menu_provider.dart';
@@ -18,8 +19,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<MenuBloc>(
-      create: (context) => MenuBloc(),
+    return BlocProvider<MenuListBloc>(
+      create: (context) => MenuListBloc(),
       child: ScreenUtilInit(
         designSize: const Size(430, 932),
         minTextAdapt: true,

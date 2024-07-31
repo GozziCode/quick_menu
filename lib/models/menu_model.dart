@@ -14,7 +14,6 @@ class MenuModel extends Equatable {
   });
 
   @override
-  // TODO: implement props
   List<Object?> get props => [name, description, price, category];
 
   factory MenuModel.fromJson(Map<String, dynamic> json) {
@@ -48,8 +47,20 @@ class Menu extends Equatable {
       required this.dateTime,
       required this.title});
 
+  Menu copyWith({
+    String? title,
+    List<String>? categories,
+    Map<String, List<MenuModel>>? map,
+  }) {
+    return Menu(
+      title: title ?? this.title,
+      categories: categories ?? List.from(this.categories),
+      map: map ?? Map.from(this.map),
+      dateTime: DateTime.now(),
+    );
+  }
+
   @override
-  // TODO: implement props
   List<Object?> get props => [title, map, categories, dateTime];
 
   factory Menu.fromList(List<MenuModel> items) {

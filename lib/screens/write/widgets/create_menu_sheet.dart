@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:quick_menu/screens/write/bloc/menu_bloc.dart';
-import 'package:quick_menu/screens/write/bloc/menu_event.dart';
-import 'package:quick_menu/screens/write/edit_collection_screen.dart';
-import 'package:quick_menu/screens/write/menu_list_screen.dart';
+import 'package:quick_menu/screens/write/bloc/list/menu_bloc.dart';
 
 import '../../../constant/app_color.dart';
 
 import '../../../models/menu_model.dart';
-import '../../../providers/menu_provider.dart';
+import '../bloc/list/menu_event.dart';
 
 class CreateMenuBottomSheet extends StatelessWidget {
   CreateMenuBottomSheet({super.key});
@@ -86,7 +83,7 @@ class CreateMenuBottomSheet extends StatelessWidget {
                             categories: [],
                             dateTime: DateTime.now(),
                             title: _menuNameTextController.text);
-                        context.read<MenuBloc>().add(AddMenu(newMenu));
+                        context.read<MenuListBloc>().add(AddMenu(newMenu));
 
                         Navigator.pop(context);
                       }

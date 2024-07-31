@@ -89,18 +89,6 @@ class EditForm extends StatelessWidget {
             hintText: category.text,
           ),
         ),
-        // Container(
-        //   height: 48.h,
-        //   decoration: BoxDecoration(
-        //       border: Border.all(color: AppColors.lightGrey),
-        //       borderRadius: BorderRadius.circular(8)),
-        //   child: TextFormField(
-        //     controller: category,
-        //     decoration: const InputDecoration(
-        //       border: OutlineInputBorder(borderSide: BorderSide.none),
-        //     ),
-        //   ),
-        // ),
         SizedBox(height: 15.h),
         Text(
           'Product Description',
