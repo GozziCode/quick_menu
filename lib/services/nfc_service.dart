@@ -1,21 +1,33 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:typed_data';
 
+import 'package:flutter/material.dart';
 import 'package:nfc_manager/nfc_manager.dart';
-import 'package:quick_menu/models/menu_model.dart';
+
+import '../models/menu_model.dart';
+import '../screens/alert_box.dart';
 
 Future<bool> isNfcAvailable() async {
   return await NfcManager.instance.isAvailable();
 }
 
-Future<String> writeMenuToNfc(Menu menu) async {
+Future<String> writeMenuToNfc(Menu menu, BuildContext context) async {
   String status = "";
   bool isAvailable = await NfcManager.instance.isAvailable();
 
   if (!isAvailable) {
-    print('NFC is not available on this device');
-    status = "not available";
+    debugPrint('NFC is not available on this device');
+    status = "NFC is not available on this device";
+    if (context.mounted) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertBox(
+          title: 'Error',
+          img: 'assets/images/fail.png',
+          message: status,
+        ),
+      );
+    }
     return status;
   }
 
@@ -26,8 +38,18 @@ Future<String> writeMenuToNfc(Menu menu) async {
     var ndef = Ndef.from(tag);
 
     if (ndef == null) {
-      print('Tag is not NDEF compatible');
-      status = "tag not compatible";
+      debugPrint('Tag is not NDEF compatible');
+      status = "Tag not compatible";
+      if (context.mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertBox(
+            title: 'Error',
+            img: 'assets/images/fail.png',
+            message: status,
+          ),
+        );
+      }
       return;
     }
 
@@ -39,10 +61,29 @@ Future<String> writeMenuToNfc(Menu menu) async {
 
     try {
       await ndef.write(message);
-      print('MenuItem written successfully to NFC tag');
+      debugPrint('MenuItem written successfully to NFC tag');
       status = "MenuItem written successfully to NFC tag";
+      if (context.mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertBox(
+              title: 'Success',
+              img: 'assets/images/success.png',
+              message: status),
+        );
+      }
     } catch (e) {
-      print('Error writing to NFC: $e');
+      debugPrint('Error writing to NFC: $e');
+      if (context.mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertBox(
+            title: 'Error',
+            img: 'assets/images/fail.png',
+            message: e.toString(),
+          ),
+        );
+      }
     } finally {
       NfcManager.instance.stopSession();
     }
@@ -50,11 +91,20 @@ Future<String> writeMenuToNfc(Menu menu) async {
   return status;
 }
 
-Future<Menu?> readMenuFromNfc() async {
+Future<Menu?> readMenuFromNfc(BuildContext context) async {
   bool isAvailable = await NfcManager.instance.isAvailable();
 
   if (!isAvailable) {
-    print('NFC is not available on this device');
+    debugPrint('NFC is not available on this device');
+    if (context.mounted) {
+      showDialog(
+        context: context,
+        builder: (context) => const AlertBox(
+            title: 'Error',
+            img: 'assets/images/fail.png',
+            message: 'NFC is not available on this device'),
+      );
+    }
     return null;
   }
 
@@ -65,6 +115,15 @@ Future<Menu?> readMenuFromNfc() async {
 
     if (ndef == null) {
       completer.complete(null);
+      if (context.mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => const AlertBox(
+              title: 'Error',
+              img: 'assets/images/fail.png',
+              message: 'No data found'),
+        );
+      }
       return;
     }
 
@@ -77,14 +136,43 @@ Future<Menu?> readMenuFromNfc() async {
           Map<String, dynamic> json = jsonDecode(jsonString);
           Menu menu = Menu.fromJson(json);
           completer.complete(menu);
+          if (context.mounted) {
+            showDialog(
+              context: context,
+              builder: (context) => const AlertBox(
+                title: 'Success',
+                img: 'assets/images/success.png',
+                message:
+                    'Update on the product details has been recorded successfully',
+              ),
+            );
+          }
           return;
         }
       }
       completer.complete(null);
     } catch (e) {
       completer.completeError(e);
+      if (context.mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => AlertBox(
+              title: 'Error',
+              img: 'assets/images/fail.png',
+              message: e.toString()),
+        );
+      }
     } finally {
       NfcManager.instance.stopSession();
+      if (context.mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => const AlertBox(
+              title: 'Error',
+              img: 'assets/images/fail.png',
+              message: 'Session Time Out, please try again.'),
+        );
+      }
     }
   });
 

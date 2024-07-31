@@ -33,7 +33,8 @@ class _MenuListScreenState extends State<MenuListScreen> {
             backgroundColor: AppColors.white,
             surfaceTintColor: Colors.transparent,
             actions: [
-              IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.delete))
+              IconButton(
+                  onPressed: () {}, icon: const Icon(CupertinoIcons.delete))
             ],
           ),
           floatingActionButton: FloatingActionButton(
@@ -41,7 +42,7 @@ class _MenuListScreenState extends State<MenuListScreen> {
               _showCreateBottomSheet(context);
             },
             backgroundColor: AppColors.primaryColor,
-            shape: OvalBorder(),
+            shape: const OvalBorder(),
             child: const Icon(
               CupertinoIcons.add,
               color: AppColors.white,
@@ -55,7 +56,7 @@ class _MenuListScreenState extends State<MenuListScreen> {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
+                      const Padding(
                         padding:
                             EdgeInsets.only(left: 24.0, top: 12.0, bottom: 8.0),
                         child: Text(
@@ -112,10 +113,11 @@ class MenuCollection extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: EdgeInsets.symmetric(vertical: 0.0),
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 0.0),
                               child: Text(
                                 state.menu.title,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 24.0,
                                     fontWeight: FontWeight.w600),
                               ),
@@ -125,24 +127,24 @@ class MenuCollection extends StatelessWidget {
                                 Chip(
                                   label: Text(
                                       "+${state.menu.categories.length} categories"),
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 8.0, vertical: 2.0),
-                                  labelPadding: EdgeInsets.all(0.0),
+                                  labelPadding: const EdgeInsets.all(0.0),
                                   color:
                                       WidgetStateProperty.all(AppColors.white),
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
                                           BorderRadius.circular(24.0)),
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 12.0,
                                 ),
                                 Chip(
                                   label: Text(
                                       "${state.menu.dateTime.day}/${state.menu.dateTime.month < 10 ? "0${state.menu.dateTime.month}" : state.menu.dateTime.month}/${state.menu.dateTime.year}"),
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 8.0, vertical: 2.0),
-                                  labelPadding: EdgeInsets.all(0.0),
+                                  labelPadding: const EdgeInsets.all(0.0),
                                   color:
                                       WidgetStateProperty.all(AppColors.white),
                                   shape: RoundedRectangleBorder(
@@ -171,6 +173,7 @@ class MenuCollection extends StatelessWidget {
                             child: SvgPicture.asset(
                               'assets/svgs/edit.svg',
                               width: 30.0,
+                              //Todo: Remove deprecated code
                               color: AppColors.primaryColor,
                             ),
                           ))

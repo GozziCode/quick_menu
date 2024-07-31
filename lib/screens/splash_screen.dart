@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:quick_menu/screens/onboarding/onboarding.dart';
-import 'package:quick_menu/services/nfc_service.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -16,23 +15,16 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Future<void> _checkNfcAndNavigate() async {
-    bool nfcEnabled = await isNfcAvailable();
+   
 
     Timer(const Duration(seconds: 2), () {
-      if (nfcEnabled) {
+     
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (c) => const OnboardingScreen(),
             ));
-      } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const OnboardingScreen()
-              //  const EnableNfcScreen(),
-              ),
-        );
-      }
+     
     });
   }
 

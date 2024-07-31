@@ -15,9 +15,9 @@ class WritingScreen extends StatefulWidget {
 }
 
 class _WritingScreenState extends State<WritingScreen> {
-  Future<void> _readingNfc() async {
+  Future<void> _readingNfc(BuildContext context) async {
     try {
-      await writeMenuToNfc(widget.menu).then((onValue) {
+      await writeMenuToNfc(widget.menu, context).then((onValue) {
         debugPrint("Status");
         showModalBottomSheet(
             context: context,
@@ -43,7 +43,7 @@ class _WritingScreenState extends State<WritingScreen> {
 
   @override
   void initState() {
-    _readingNfc();
+    _readingNfc(context);
     super.initState();
   }
 

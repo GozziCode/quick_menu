@@ -17,7 +17,7 @@ class SearchingScreen extends StatefulWidget {
 class _SearchingScreenState extends State<SearchingScreen> {
   Future<void> _readingNfc() async {
     try {
-      await readMenuFromNfc().then((menuModel) {
+      await readMenuFromNfc(context).then((menuModel) {
         if (menuModel != null) {
           Navigator.of(context).push(
             MaterialPageRoute(

@@ -1,4 +1,4 @@
-import 'dart:ffi';
+
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +30,7 @@ class _EditCollectionScreenState extends State<EditCollectionScreen> {
         appBar: AppBar(
           title: Text(
             state.menu.title,
-            style: TextStyle(fontWeight: FontWeight.w600),
+            style: const TextStyle(fontWeight: FontWeight.w600),
           ),
           backgroundColor: AppColors.white,
           surfaceTintColor: Colors.transparent,
@@ -118,7 +118,7 @@ class _MenuCategory extends StatelessWidget {
           children: [
             Text(
               category,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                   color: AppColors.primaryColor),
@@ -155,27 +155,27 @@ class _MenuItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 4.0),
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Text(
                     menuModel.name,
-                    style:
-                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 16.0, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Text(
                   menuModel.description,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14.0,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
                     "\$${menuModel.price.toStringAsFixed(2)}",
-                    style:
-                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 16.0, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
@@ -213,57 +213,10 @@ class _MenuItem extends StatelessWidget {
                 child: SvgPicture.asset(
                   'assets/svgs/edit.svg',
                 ),
-              ))
+              ),)
         ],
       );
     });
   }
 }
 
-void _showEditBottomSheet(
-    BuildContext context, MenuModel menuModel, String title) {
-  showModalBottomSheet(
-    backgroundColor: AppColors.bgColor,
-    context: context,
-    isScrollControlled: true,
-    useSafeArea: true,
-    builder: (BuildContext context) {
-      return DraggableScrollableSheet(
-        minChildSize: 0.5,
-        maxChildSize: 0.9,
-        initialChildSize: 0.8,
-        snap: true,
-        expand: false,
-        builder: (_, controller) {
-          return EditBottomSheet(
-            menuModel: menuModel,
-            menuTitle: title,
-          );
-        },
-      );
-    },
-  );
-}
-
-void _showAddBottomSheet(BuildContext context, String title) {
-  showModalBottomSheet(
-    backgroundColor: AppColors.bgColor,
-    context: context,
-    isScrollControlled: true,
-    useSafeArea: true,
-    builder: (BuildContext context2) {
-      return DraggableScrollableSheet(
-        minChildSize: 0.5,
-        maxChildSize: 0.9,
-        initialChildSize: 0.8,
-        snap: true,
-        expand: false,
-        builder: (context, controller) {
-          return AddBottomSheet(
-            menuTitle: title,
-          );
-        },
-      );
-    },
-  );
-}

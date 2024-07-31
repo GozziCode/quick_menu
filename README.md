@@ -20,7 +20,7 @@
 - [Future Improvements](#future-improvements)
 - [APK Download](#apk-download)
 - [Appitize Link](#appitize-link)
-- [Author](#author)
+- [Author](#authors)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -77,13 +77,11 @@ Developers were paired in a team of five to work together to bring this project 
 - Understanding NFC Technology
 Integrating the NFC technology required a deep understanding of NFC and handling data transfer.
 - State Management
-Implementing state management with the Provider package in Flutter was essential for maintaining and updating the app's state efficiently. This pattern helped in separating the business logic from the UI, making the code more maintainable and scalable.
+Implementing state management with the Bloc package in Flutter was essential for maintaining and updating the app's state efficiently. This pattern helped in separating the business logic from the UI, making the code more maintainable and scalable.
 - Effective UI/UX Design
 Creating a user-friendly interface involved using various Flutter widgets to provide a smooth and responsive experience. The pull-to-refresh feature and shimmer loading effect were particularly effective in improving the user experience by providing visual feedback during data loading.
 - MVVM Architecture
 Adopting the MVVM architecture pattern was a significant step in organizing the codebase. This architecture facilitated a clear separation of concerns, making the app easier to manage and extend.
-- Async Programming
-Handling asynchronous operations, such as fetching data from the NFC tag, was critical. Understanding Dart's async and await keywords and effectively managing loading states and error handling improved the app's robustness.
 
 ## Installation
 
@@ -170,17 +168,36 @@ Download the latest version of the app from the link below:
 or
 Download [here](/gitfiles/malltiverse.apk)
 
-## Appitize Link
+## Live Demo Link
 
-Try Quick Menu Demo: [Appitize.io](https:)
+Try Quick Menu Demo: [Google drive](https:)
 
-## Author
+## Authors
 
-- Uma Godwin, Spicy, Wisdom
+#### Uma Godwin
 
 - Linkedin - [@godwinekeuma](https://www.linkedin.com/in/godwinekeuma)
-- Email - [godwinekeuma@gmail.com](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@godwinekeuma](https://www.twitter.com/godwinekeuma)
+- Email - [godwinekeuma@gmail.com](godwinekeuma@gmail.com)
+
+#### Iyamu Wisdom
+
+- Linkedin - [@wisdomiyamu](https://www.linkedin.com/in/ibrahim-sakariyah)
+- Email - [wisdomiyamu@gmail.com](wisdomiyamu@gmail.com)
+
+#### Sakariyah Ibrahim Temitope
+
+- Linkedin - [@ibrahim-sakariyah](https://www.linkedin.com/in/ibrahim-sakariyah)
+- Email - [ibrahimsakariyah@gmail.com](ibrahimsakariyah@gmail.com)
+
+#### Ijeoma Ogbonna
+
+- Linkedin - [@ogbonnaijeoma](https://www.linkedin.com/in/ogbonnaijeoma)
+- Email - [ogbonnaijeoma871@gmail.com](ogbonnaijeoma871@gmail.com)
+
+#### Obor Spicy
+
+- Linkedin - [@israelmenyaga](https://www.linkedin.com/in/israelmenyaga)
+- Email - [dev.izzy.code@gmail.com](dev.izzy.code@gmail.com)
 
 ## Contributing
 
