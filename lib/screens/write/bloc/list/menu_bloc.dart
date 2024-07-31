@@ -5,7 +5,7 @@ import 'menu_event.dart';
 import 'menu_state.dart';
 
 class MenuListBloc extends Bloc<MenuListEvent, MenuListState> {
-  MenuListBloc() : super(MenuListState(menus: [])) {
+  MenuListBloc() : super(const MenuListState(menus: [])) {
     on<AddMenu>(_onAddMenu);
     on<DeleteMenu>(_onDeleteMenu);
   }
@@ -17,7 +17,8 @@ class MenuListBloc extends Bloc<MenuListEvent, MenuListState> {
 
   void _onDeleteMenu(DeleteMenu event, Emitter<MenuListState> emit) {
     final updatedMenus =
-        state.menus.where((menu) => menu.title != event.title).toList();
+        List<Menu>.from(state.menus.where((menu) => menu != event.menu))
+            .toList();
     emit(state.copyWith(menus: updatedMenus));
   }
 }

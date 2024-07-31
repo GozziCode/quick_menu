@@ -69,7 +69,6 @@ class EditBottomSheet extends StatelessWidget {
                 Center(
                   child: GestureDetector(
                     onTap: () {
-                      print(categoryController.text);
                       MenuModel newMenuModel = MenuModel(
                           name: productNameController.text,
                           description: descriptionController.text,
@@ -99,7 +98,37 @@ class EditBottomSheet extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
+                ),
+                SizedBox(height: 16.h),
+                Center(
+                  child: GestureDetector(
+                    onTap: () {
+                      context
+                          .read<MenuModelBloc>()
+                          .add(RemoveMenuItem(menuModel, menuModel.category));
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      width: 384.w,
+                      height: 52.h,
+                      decoration: BoxDecoration(
+                        color: AppColors.red,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'Delete Product',
+                          style: GoogleFonts.inter(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500,
+                            color: AppColors.white,
+                            height: (19.36 / 16).h,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

@@ -1,9 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:quick_menu/screens/write/bloc/list/menu_event.dart';
 import 'package:quick_menu/screens/write/bloc/model/menu_bloc.dart';
 import 'package:quick_menu/screens/write/bloc/model/menu_state.dart';
 import 'package:quick_menu/screens/write/widgets/add_bottom_sheet.dart';
@@ -11,17 +10,13 @@ import 'package:quick_menu/screens/write/widgets/edit_bottom_sheet.dart';
 
 import '../../constant/app_color.dart';
 import '../../models/menu_model.dart';
+import 'bloc/list/menu_bloc.dart';
 
-class EditCollectionScreen extends StatefulWidget {
+class EditCollectionScreen extends StatelessWidget {
   final Menu menu;
 
   const EditCollectionScreen({super.key, required this.menu});
 
-  @override
-  State<EditCollectionScreen> createState() => _EditCollectionScreenState();
-}
-
-class _EditCollectionScreenState extends State<EditCollectionScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MenuModelBloc, MenuModelState>(
@@ -30,15 +25,16 @@ class _EditCollectionScreenState extends State<EditCollectionScreen> {
         appBar: AppBar(
           title: Text(
             state.menu.title,
-            style: TextStyle(fontWeight: FontWeight.w600),
+            style: const TextStyle(fontWeight: FontWeight.w600),
           ),
           backgroundColor: AppColors.white,
           surfaceTintColor: Colors.transparent,
           actions: [
             IconButton(
                 onPressed: () {
-                  // context
-                  // Navigator.pop(context);
+                  context.read<MenuListBloc>().add(DeleteMenu(menu));
+
+                  Navigator.pop(context);
                 },
                 icon: const Icon(
                   CupertinoIcons.delete,
@@ -121,7 +117,7 @@ class _MenuCategory extends StatelessWidget {
           children: [
             Text(
               category,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                   color: AppColors.primaryColor),
@@ -158,27 +154,27 @@ class _MenuItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 4.0),
+                  padding: const EdgeInsets.symmetric(vertical: 4.0),
                   child: Text(
                     menuModel.name,
-                    style:
-                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 16.0, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Text(
                   menuModel.description,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14.0,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Text(
                     "\$${menuModel.price.toStringAsFixed(2)}",
-                    style:
-                        TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 16.0, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
@@ -195,7 +191,7 @@ class _MenuItem extends StatelessWidget {
                     return DraggableScrollableSheet(
                       minChildSize: 0.5,
                       maxChildSize: 0.9,
-                      initialChildSize: 0.8,
+                      initialChildSize: 0.83,
                       snap: true,
                       expand: false,
                       builder: (_, controller) {
@@ -221,52 +217,4 @@ class _MenuItem extends StatelessWidget {
       );
     });
   }
-}
-
-void _showEditBottomSheet(
-    BuildContext context, MenuModel menuModel, String title) {
-  showModalBottomSheet(
-    backgroundColor: AppColors.bgColor,
-    context: context,
-    isScrollControlled: true,
-    useSafeArea: true,
-    builder: (BuildContext context) {
-      return DraggableScrollableSheet(
-        minChildSize: 0.5,
-        maxChildSize: 0.9,
-        initialChildSize: 0.8,
-        snap: true,
-        expand: false,
-        builder: (_, controller) {
-          return EditBottomSheet(
-            menuModel: menuModel,
-            menuTitle: title,
-          );
-        },
-      );
-    },
-  );
-}
-
-void _showAddBottomSheet(BuildContext context, String title) {
-  showModalBottomSheet(
-    backgroundColor: AppColors.bgColor,
-    context: context,
-    isScrollControlled: true,
-    useSafeArea: true,
-    builder: (BuildContext context2) {
-      return DraggableScrollableSheet(
-        minChildSize: 0.5,
-        maxChildSize: 0.9,
-        initialChildSize: 0.8,
-        snap: true,
-        expand: false,
-        builder: (context, controller) {
-          return AddBottomSheet(
-            menuTitle: title,
-          );
-        },
-      );
-    },
-  );
 }

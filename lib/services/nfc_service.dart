@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:nfc_manager/nfc_manager.dart';
 import 'package:quick_menu/models/menu_model.dart';
@@ -14,7 +13,6 @@ Future<String> writeMenuToNfc(Menu menu) async {
   bool isAvailable = await NfcManager.instance.isAvailable();
 
   if (!isAvailable) {
-    print('NFC is not available on this device');
     status = "not available";
     return status;
   }
@@ -26,7 +24,6 @@ Future<String> writeMenuToNfc(Menu menu) async {
     var ndef = Ndef.from(tag);
 
     if (ndef == null) {
-      print('Tag is not NDEF compatible');
       status = "tag not compatible";
       return;
     }
@@ -39,11 +36,9 @@ Future<String> writeMenuToNfc(Menu menu) async {
 
     try {
       await ndef.write(message);
-      print('MenuItem written successfully to NFC tag');
       status = "MenuItem written successfully to NFC tag";
     } catch (e) {
       status = e.toString();
-      print('Error writing to NFC: $e');
     } finally {
       NfcManager.instance.stopSession();
     }
@@ -55,7 +50,6 @@ Future<Menu?> readMenuFromNfc() async {
   bool isAvailable = await NfcManager.instance.isAvailable();
 
   if (!isAvailable) {
-    print('NFC is not available on this device');
     return null;
   }
 
