@@ -1,9 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:quick_menu/constant/app_color.dart';
 
 import '../../models/menu_model.dart';
 import '../../services/nfc_service.dart';
+import '../alert_box.dart';
 
 class WritingScreen extends StatefulWidget {
   final Menu menu;
@@ -15,35 +15,45 @@ class WritingScreen extends StatefulWidget {
 }
 
 class _WritingScreenState extends State<WritingScreen> {
-  Future<void> _readingNfc(BuildContext context) async {
+  Future<void> _writingNfc() async {
     try {
-      await writeMenuToNfc(widget.menu, context).then((onValue) {
-        debugPrint("Status");
-        showModalBottomSheet(
-            context: context,
-            builder: (context) {
-              return Center(
-                child: Text(onValue),
-              );
-            });
-        Navigator.pop(context);
-      });
-    } catch (e) {
+      String status = await writeMenuToNfc(widget.menu, context);
 
-       Navigator.push(
-        context.mounted? context: context,
-        MaterialPageRoute(
-          builder: (context) => const SizedBox(),
-        ),
-      );
+      if (mounted && status == "MenuItem written successfully to NFC tag") {
+        showDialog(
+          context: context,
+          builder: (context) => const AlertBox(
+              title: 'Success',
+              img: 'assets/images/success.png',
+              message: 'MenuItem written successfully to NFC tag.'),
+        );
+      }
+      if (status == "not available" && mounted) {
+        showDialog(
+          context: context,
+          builder: (context) => const AlertBox(
+              title: 'Enable NFC',
+              img: 'assets/images/fail.png',
+              message: 'You need NFC enable to write to a tag'),
+        );
+      }
+    } catch (e) {
       debugPrint('Error reading NFC: $e');
-     
+
+      showDialog(
+        context: context.mounted ? context : context,
+        builder: (context) => const AlertBox(
+            title: 'Error',
+            img: 'assets/images/fail.png',
+            message:
+                'An error occurred while reading the NFC tag. Please try again.'),
+      );
     }
   }
 
   @override
   void initState() {
-    _readingNfc(context);
+    _writingNfc();
     super.initState();
   }
 
@@ -56,7 +66,7 @@ class _WritingScreenState extends State<WritingScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Image.asset("assets/images/read.png"),
+              child: Image.asset("assets/images/searching.png"),
             ),
             const Text(
               "Searching for Tags",

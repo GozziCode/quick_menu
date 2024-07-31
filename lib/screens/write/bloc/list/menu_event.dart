@@ -19,10 +19,10 @@ class AddMenu extends MenuListEvent {
 }
 
 class DeleteMenu extends MenuListEvent {
-  final String title;
+  final Menu menu;
 
-  const DeleteMenu(this.title);
+  const DeleteMenu(this.menu);
 
   @override
-  List<Object> get props => [title];
+  List<Object> get props => [menu];
 }

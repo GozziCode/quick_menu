@@ -38,7 +38,7 @@ class MenuModelBloc extends Bloc<MenuModelEvent, MenuModelState> {
   }
 
   void _onAddMenuItem(AddMenuItem event, Emitter<MenuModelState> emit) {
-    final updatedItems = Map<String, List<MenuModel>>.from(state.menu.map);
+    final updatedItems = state.menu.map;
     final categories = state.menu.categories;
     if (!updatedItems.containsKey(event.category)) {
       updatedItems[event.category] = [];
@@ -55,8 +55,6 @@ class MenuModelBloc extends Bloc<MenuModelEvent, MenuModelState> {
   void _onEditMenuItem(EditMenuItem event, Emitter<MenuModelState> emit) {
     final updatedItems = Map<String, List<MenuModel>>.from(state.menu.map);
     final categoryItems = updatedItems[event.category];
-    print(event.oldItem);
-    print(event.newItem);
 
     if (categoryItems != null) {
       final index = categoryItems.indexWhere((item) => item == event.oldItem);
@@ -82,14 +80,18 @@ class MenuModelBloc extends Bloc<MenuModelEvent, MenuModelState> {
   }
 
   void _onRemoveMenuItem(RemoveMenuItem event, Emitter<MenuModelState> emit) {
-    final updatedItems = Map<String, List<MenuModel>>.from(state.menu.map);
+    final updatedItems = state.menu.map;
     final categoryItems = updatedItems[event.category];
+    final categories = state.menu.categories;
     if (categoryItems != null) {
-      categoryItems.removeWhere((item) => item.name == event.item.name);
+      categoryItems.removeWhere((item) => item == event.item);
       if (categoryItems.isEmpty) {
         updatedItems.remove(event.category);
+        categories.remove(event.category);
       }
-      emit(state.copyWith(menu: state.menu.copyWith(map: updatedItems)));
+      emit(state.copyWith(
+          menu:
+              state.menu.copyWith(map: updatedItems, categories: categories)));
     }
   }
 }

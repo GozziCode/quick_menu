@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:quick_menu/screens/write/bloc/list/menu_event.dart';
 import 'package:quick_menu/screens/write/bloc/model/menu_bloc.dart';
 import 'package:quick_menu/screens/write/bloc/model/menu_state.dart';
 import 'package:quick_menu/screens/write/widgets/add_bottom_sheet.dart';
@@ -11,17 +12,13 @@ import 'package:quick_menu/screens/write/widgets/edit_bottom_sheet.dart';
 
 import '../../constant/app_color.dart';
 import '../../models/menu_model.dart';
+import 'bloc/list/menu_bloc.dart';
 
-class EditCollectionScreen extends StatefulWidget {
+class EditCollectionScreen extends StatelessWidget {
   final Menu menu;
 
   const EditCollectionScreen({super.key, required this.menu});
 
-  @override
-  State<EditCollectionScreen> createState() => _EditCollectionScreenState();
-}
-
-class _EditCollectionScreenState extends State<EditCollectionScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MenuModelBloc, MenuModelState>(
@@ -30,13 +27,17 @@ class _EditCollectionScreenState extends State<EditCollectionScreen> {
         appBar: AppBar(
           title: Text(
             state.menu.title,
-            style: const TextStyle(fontWeight: FontWeight.w600),
+            style: const const TextStyle(fontWeight: FontWeight.w600),
           ),
           backgroundColor: AppColors.white,
           surfaceTintColor: Colors.transparent,
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.read<MenuListBloc>().add(DeleteMenu(menu));
+
+                  Navigator.pop(context);
+                },
                 icon: const Icon(
                   CupertinoIcons.delete,
                 )),
@@ -192,7 +193,7 @@ class _MenuItem extends StatelessWidget {
                     return DraggableScrollableSheet(
                       minChildSize: 0.5,
                       maxChildSize: 0.9,
-                      initialChildSize: 0.8,
+                      initialChildSize: 0.83,
                       snap: true,
                       expand: false,
                       builder: (_, controller) {
@@ -219,4 +220,3 @@ class _MenuItem extends StatelessWidget {
     });
   }
 }
-

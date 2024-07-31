@@ -29,13 +29,9 @@ class _MenuListScreenState extends State<MenuListScreen> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Menu Edits"),
+            title: const Text("Add a Menu"),
             backgroundColor: AppColors.white,
             surfaceTintColor: Colors.transparent,
-            actions: [
-              IconButton(
-                  onPressed: () {}, icon: const Icon(CupertinoIcons.delete))
-            ],
           ),
           floatingActionButton: FloatingActionButton(
             onPressed: () {
