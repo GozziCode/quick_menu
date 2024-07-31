@@ -1,16 +1,9 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-
-=======
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
->>>>>>> 119b048260cad1ebea17cc76f8b84dc4518fb4ba
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 import 'package:quick_menu/screens/write/bloc/menu_bloc.dart';
 
 import 'constant/app_color.dart';
-import 'providers/menu_provider.dart';
 import 'screens/splash_screen.dart';
 
 void main() {

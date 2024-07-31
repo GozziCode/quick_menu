@@ -6,7 +6,7 @@ class MenuModel extends Equatable {
   final double price;
   final String category;
 
-  MenuModel({
+  const MenuModel({
     required this.name,
     required this.description,
     required this.price,
@@ -14,7 +14,6 @@ class MenuModel extends Equatable {
   });
 
   @override
-  // TODO: implement props
   List<Object?> get props => [name, description, price, category];
 
   factory MenuModel.fromJson(Map<String, dynamic> json) {
@@ -37,19 +36,18 @@ class MenuModel extends Equatable {
 }
 
 class Menu extends Equatable {
-  String title;
-  Map<String, List<MenuModel>> map;
-  List<String> categories;
-  DateTime dateTime;
+  final String title;
+  final Map<String, List<MenuModel>> map;
+  final List<String> categories;
+  final DateTime dateTime;
 
-  Menu(
+  const Menu(
       {required this.map,
       required this.categories,
       required this.dateTime,
       required this.title});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [title, map, categories, dateTime];
 
   factory Menu.fromList(List<MenuModel> items) {

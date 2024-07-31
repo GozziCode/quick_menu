@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quick_menu/screens/write/bloc/menu_bloc.dart';
 
 import 'package:quick_menu/screens/write/bloc/menu_state.dart';
@@ -29,12 +31,17 @@ class _EditCollectionScreenState extends State<EditCollectionScreen> {
         appBar: AppBar(
           title: Text(
             menu.title,
-            style: TextStyle(fontWeight: FontWeight.w600),
+            style: GoogleFonts.inter(
+              fontSize: 20.sp,
+              fontWeight: FontWeight.w600,
+              color: AppColors.textColor,
+            ),
           ),
-          backgroundColor: AppColors.white,
+          backgroundColor: AppColors.bgColor,
           surfaceTintColor: Colors.transparent,
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.delete))
+            IconButton(
+                onPressed: () {}, icon: const Icon(CupertinoIcons.delete))
           ],
         ),
         floatingActionButton: FloatingActionButton(
@@ -91,7 +98,7 @@ class _MenuCategory extends StatelessWidget {
           children: [
             Text(
               category,
-              style: TextStyle(
+              style: const TextStyle(
                   fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                   color: AppColors.primaryColor),
@@ -126,25 +133,30 @@ class _MenuItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 4.0),
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
                 child: Text(
                   menuModel.name,
-                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      fontSize: 16.0, fontWeight: FontWeight.bold),
                 ),
               ),
               Text(
                 menuModel.description,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 14.0,
                 ),
               ),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Text(
                   "\$${menuModel.price.toStringAsFixed(2)}",
-                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                  style: GoogleFonts.inter(
+                    fontSize: 16.sp,
+                    fontWeight: FontWeight.w700,
+                    color: AppColors.textColor,
+                  ),
                 ),
               ),
             ],

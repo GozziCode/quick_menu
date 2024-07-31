@@ -4,12 +4,12 @@ var jsonData = {
   "title": "Sunday's Cals",
   "map": {
     "Drinks": [
-      MenuModel(
+      const MenuModel(
           name: "name",
           description: "description",
           price: 23.0,
           category: "Drinks"),
-      MenuModel(
+      const MenuModel(
           name: "name",
           description: "description",
           price: 23.0,

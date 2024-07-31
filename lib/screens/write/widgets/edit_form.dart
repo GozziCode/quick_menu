@@ -73,18 +73,18 @@ class EditForm extends StatelessWidget {
           dropdownColor: AppColors.white,
           decoration: InputDecoration(
             constraints: BoxConstraints(maxHeight: 48.h),
-            contentPadding: EdgeInsets.fromLTRB(12.0, 0, 12.0, 0),
+            contentPadding: const EdgeInsets.fromLTRB(12.0, 0, 12.0, 0),
             focusColor: AppColors.lightGrey,
             filled: true,
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
-                borderSide: BorderSide(color: AppColors.lightGrey)),
+                borderSide: const BorderSide(color: AppColors.lightGrey)),
             border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
-                borderSide: BorderSide(color: AppColors.lightGrey)),
+                borderSide: const BorderSide(color: AppColors.lightGrey)),
             enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.0),
-                borderSide: BorderSide(color: AppColors.lightGrey)),
+                borderSide: const BorderSide(color: AppColors.lightGrey)),
             fillColor: Colors.white,
             hintText: category.text,
           ),

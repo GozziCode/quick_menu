@@ -1,7 +1,7 @@
 # HNG Mobile Dev: Stage Five Task  - Quick Menu by Kimiko's Place
 
 ---
-![alt text](/gitfiles/screenshot1.png)
+![Splash Screen](/gitfiles/screenshot1.png)
 
 ## Table of contents
 
@@ -14,7 +14,7 @@
   - [Built with](#built-with)
   - [Installation](#installation)
   - [Useful resources](#useful-resources)
-- [API Integration](#nfc-technology)
+- [API Integration](#nfc-near-field-communication)
 - [UI/UX](#uiux)
 - [Mobile Architecture](#mobile-architecture)
 - [Future Improvements](#future-improvements)
@@ -47,11 +47,12 @@ Quick Menu is a resturant menu mobile app that transform the dinning experience 
 
 ### Screenshot
 
-![alt text](/gitfiles/screenshot2.png)
-![alt text](/gitfiles/screenshot4.png)
-![alt text](/gitfiles/screenshot5.png)
-![alt text](/gitfiles/screenshot6.png)
-![alt text](/gitfiles/screenshot7.png)
+![Onbording screen](/gitfiles/screenshot3.png)
+![Enable NFC Screen](/gitfiles/screenshot2.png)
+![Optin Screen](/gitfiles/screenshot4.png)
+![Error Screen](/gitfiles/screenshot5.png)
+![Add New Prroduct Screen](/gitfiles/screenshot6.png)
+![Write to NFC](/gitfiles/screenshot7.png)
 ![alt text](/gitfiles/screenshot8.png)
 ![alt text](/gitfiles/screenshot9.png)
 
@@ -59,7 +60,7 @@ Quick Menu is a resturant menu mobile app that transform the dinning experience 
 
 - Digital Menu Access: Instantly view the resturant's menu by tapping your phone on an NFC tag placed on the table.
 - Splash Screen: An initial loading screen with the app logo that navigates to the home screen after a delay.
-- Easy Menu Updates: Restaurants admin can update menu items, prices and availability with ease. It allows restaurant's staff to write menu details on the NFC tags via the app.
+- Easy Menu Updates: Restaurants admin can add menu items, prices and categories with ease. It allows restaurant's staff to write menu details on the NFC tags via the app.
 
 ## The process
 
@@ -71,6 +72,8 @@ Quick Menu is a resturant menu mobile app that transform the dinning experience 
 
 Developing the Quick Menu app provided several valuable insights and lessons, both technical and non-technical, these lessons are summarized in the following bullet point:
 
+- The value of team work and collaboration.
+Developers were paired in a team of five to work together to bring this project idea to live.
 - Understanding NFC Technology
 Integrating the NFC technology required a deep understanding of NFC and handling data transfer.
 - State Management
@@ -127,9 +130,11 @@ Also check out these links to start your first flutter project:
 - [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
 - [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-## NFC Technology
+## NFC (Near Field Communication)
 
-Quick Menu integrates with NFC, ....
+Quick Menu integrates with NFC, NFC (Near Field Communication) is a wireless communication technology that allows the exchange of data between devices over short distances, typically less than 10 centimeters. It operates at a frequency of 13.56 MHz and enables quick, secure transactions and data transfer.
+
+In the context of this project, NFC functionality is utilized to enhance the user experience by providing features such as reading, writing, and editing data on NFC tags. This enables users to interact with physical objects in innovative ways, such as accessing menu items in by tapping their phones on NFC-enabled tags.
 
 ## UI/UX
 

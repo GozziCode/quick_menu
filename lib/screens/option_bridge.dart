@@ -1,66 +1,48 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:quick_menu/constant/app_color.dart';
-import 'package:quick_menu/screens/read/searching_screen.dart';
-import 'package:quick_menu/screens/write/menu_list_screen.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
-import '../models/menu_model.dart';
+import '../constant/app_color.dart';
+import 'read/searching_screen.dart';
+import 'write/menu_list_screen.dart';
 
 class OptionBridge extends StatelessWidget {
   const OptionBridge({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<MenuModel>? menuItem = [
-      MenuModel(
-          name: "name",
-          description: "description",
-          price: 23.0,
-          category: "category"),
-      MenuModel(
-          name: "name",
-          description: "description",
-          price: 23.0,
-          category: "category"),
-      MenuModel(
-          name: "name",
-          description: "description",
-          price: 23.0,
-          category: "category1"),
-      MenuModel(
-          name: "name",
-          description: "description",
-          price: 23.0,
-          category: "category1"),
-    ];
-
-    final menu = Menu.fromList(menuItem);
     return Scaffold(
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.all(16.0),
+              padding: EdgeInsets.symmetric(horizontal: 24.0.w, vertical: 16),
               child: Text(
                 "Select an option",
-                style: TextStyle(fontSize: 24.0),
+                style: GoogleFonts.inter(
+                  fontSize: 24.sp,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.textColor,
+                ),
               ),
             ),
-            Expanded(
+            const Expanded(
               child: NfcChoice(
                 text: 'Read a Menu',
                 imageUrl: 'assets/images/read.png',
                 screen: SearchingScreen(),
               ),
             ),
-            Expanded(
+            const Expanded(
               child: NfcChoice(
                 text: 'Write a Menu',
                 imageUrl: 'assets/images/write.png',
                 screen: MenuListScreen(),
               ),
             ),
+            const SizedBox(height: 10)
           ],
         ),
       ),
@@ -87,8 +69,8 @@ class NfcChoice extends StatelessWidget {
             context, MaterialPageRoute(builder: (context) => screen));
       },
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-        padding: EdgeInsets.all(12.0),
+        margin: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+        padding: const EdgeInsets.all(15.0),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
             color: AppColors.primaryColor.withOpacity(0.25)),
@@ -100,23 +82,27 @@ class NfcChoice extends StatelessWidget {
               children: [
                 Text(
                   text,
-                  style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w500),
+                  style: GoogleFonts.inter(
+                    fontSize: 22.sp,
+                    fontWeight: FontWeight.w500,
+                    color: AppColors.textColor,
+                  ),
                 ),
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(90.0),
                       color: AppColors.primaryColor),
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: const Icon(
+                  child: const Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Icon(
                       CupertinoIcons.arrow_up_right,
                       size: 36.0,
                       color: AppColors.white,
                     ),
                   ),
-                )
+                ),
               ],
-            )
+            ),
           ],
         ),
       ),

@@ -19,7 +19,7 @@ class AlertBox extends StatelessWidget {
       contentPadding: EdgeInsets.all(24.0.w),
       content: SizedBox(
         width: 300.w,
-        height: 200.h,
+        height: 180.h,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

@@ -14,7 +14,7 @@ Future<String> writeMenuToNfc(Menu menu) async {
   bool isAvailable = await NfcManager.instance.isAvailable();
 
   if (!isAvailable) {
-    print('NFC is not available on this device');
+    debugPrint('NFC is not available on this device');
     status = "not available";
     return status;
   }
@@ -26,7 +26,7 @@ Future<String> writeMenuToNfc(Menu menu) async {
     var ndef = Ndef.from(tag);
 
     if (ndef == null) {
-      print('Tag is not NDEF compatible');
+      debugPrint('Tag is not NDEF compatible');
       status = "tag not compatible";
       return;
     }
@@ -39,7 +39,7 @@ Future<String> writeMenuToNfc(Menu menu) async {
 
     try {
       await ndef.write(message);
-      print('MenuItem written successfully to NFC tag');
+      debugPrint('MenuItem written successfully to NFC tag');
       status = "MenuItem written successfully to NFC tag";
     } catch (e) {
       debugPrint('Error writing to NFC: $e');
@@ -73,12 +73,11 @@ Future<Menu?> readMenuFromNfc() async {
 
       for (NdefRecord record in records.records) {
         if (record.typeNameFormat == NdefTypeNameFormat.nfcWellknown) {
-          // String jsonString = String.fromCharCodes(record.payload);
-          //print(jsonString);
+         
           String tryString = String.fromCharCodes(record.payload);
           String jsonString = tryString.substring(tryString.indexOf('{'));
           Map<String, dynamic> json = jsonDecode(jsonString);
-          //print(json);
+          
           Menu menu = Menu.fromJson(json);
 
           completer.complete(menu);

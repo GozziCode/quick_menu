@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../models/menu_model.dart';
 import 'menu_event.dart';
@@ -42,7 +43,7 @@ class MenuBloc extends Bloc<MenuEvent, MenuState> {
       }
       return menu;
     }).toList();
-    print(updatedMenus);
+    debugPrint(updatedMenus.toString());
 
     emit(state.copyWith(menus: updatedMenus));
   }

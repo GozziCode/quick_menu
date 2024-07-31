@@ -70,10 +70,9 @@ class AddBottomSheet extends StatelessWidget {
                           description: descriptionController.text,
                           price: double.parse(priceController.text),
                           category: categoryController.text);
-
+                      //TODO: What happens when there is an error
                       context.read<MenuBloc>().add(EditMenuModel(menuTitle,
                           null, categoryController.text, newMenuModel));
-
                       Navigator.pop(context);
                     },
                     child: Container(
@@ -96,7 +95,7 @@ class AddBottomSheet extends StatelessWidget {
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),

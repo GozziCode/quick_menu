@@ -1,11 +1,9 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:quick_menu/constant/app_color.dart';
 
 import '../../models/menu_model.dart';
 import '../../services/nfc_service.dart';
-import '../menu_screen.dart';
 
 class WritingScreen extends StatefulWidget {
   final Menu menu;
@@ -20,26 +18,26 @@ class _WritingScreenState extends State<WritingScreen> {
   Future<void> _readingNfc() async {
     try {
       await writeMenuToNfc(widget.menu).then((onValue) {
-        print("Status");
+        debugPrint("Status");
         showModalBottomSheet(
             context: context,
             builder: (context) {
               return Center(
-                child: Container(
-                  child: Text(onValue),
-                ),
+                child: Text(onValue),
               );
             });
         Navigator.pop(context);
       });
     } catch (e) {
-      print('Error reading NFC: $e');
-      Navigator.push(
-        context,
+
+       Navigator.push(
+        context.mounted? context: context,
         MaterialPageRoute(
           builder: (context) => const SizedBox(),
         ),
       );
+      debugPrint('Error reading NFC: $e');
+     
     }
   }
 
@@ -60,15 +58,15 @@ class _WritingScreenState extends State<WritingScreen> {
             Expanded(
               child: Image.asset("assets/images/read.png"),
             ),
-            Text(
+            const Text(
               "Searching for Tags",
               style: TextStyle(
                   color: AppColors.textColor,
                   fontSize: 24.0,
                   fontWeight: FontWeight.w600),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 36.0),
+            const Padding(
+              padding: EdgeInsets.only(top: 8.0, bottom: 36.0),
               child: Text(
                 "Keep your phone close to the tag",
                 style: TextStyle(color: AppColors.textColor, fontSize: 18.0),
@@ -82,10 +80,10 @@ class _WritingScreenState extends State<WritingScreen> {
                       shape: WidgetStateProperty.all(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0))),
                       padding: WidgetStateProperty.all(
-                          EdgeInsets.symmetric(vertical: 12.0)),
+                          const EdgeInsets.symmetric(vertical: 12.0)),
                       side: WidgetStateProperty.all(
-                          BorderSide(color: AppColors.textColor))),
-                  child: Text(
+                          const BorderSide(color: AppColors.textColor))),
+                  child: const Text(
                     "Cancel",
                     style:
                         TextStyle(color: AppColors.textColor, fontSize: 18.0),

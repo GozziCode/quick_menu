@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:quick_menu/constant/app_color.dart';
 
 import '../../services/nfc_service.dart';
-import '../menu_screen.dart';
+import '../alert_box.dart';
+import 'menu_screen.dart';
 
 class SearchingScreen extends StatefulWidget {
   const SearchingScreen({super.key});
@@ -26,47 +27,38 @@ class _SearchingScreenState extends State<SearchingScreen> {
         } else {
           // Handle the case when no valid NFC data is found
           showDialog(
-            context: context,
-            builder: (context) => AlertDialog(
-              title: Text('No Menu Data'),
-              content: Text('No valid menu data was found on the NFC tag.'),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text('OK'),
-                ),
-              ],
-            ),
-          );
+              context: context,
+              builder: (context) => const AlertBox(
+                    title: 'Error',
+                    img: 'assets/images/fail.png',
+                    message: 'No valid menu data was found please try again.',
+                  ));
         }
       }).catchError((error) {
         // Handle errors and prompt the user to try again
         showDialog(
           context: context,
-          builder: (context) => AlertDialog(
-            title: Text('Error'),
-            content: Text(
-                'An error occurred while reading the NFC tag. Please try again.'),
-            actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text('OK'),
-              ),
-              TextButton(
-                onPressed: () async {
-                  Navigator.pop(context);
-// Try again
-                },
-                child: Text('Try Again'),
-              ),
-            ],
-          ),
+          builder: (context) => const AlertBox(
+              title: 'Error',
+              img: 'assets/images/fail.png',
+              message:
+                  'An error occurred while reading the NFC tag. Please try again.'),
         );
       });
     } catch (e) {
-      print('Error reading NFC: $e');
+      debugPrint('Error reading NFC: $e');
+
+      showDialog(
+        context: context.mounted ? context : context,
+        builder: (context) => const AlertBox(
+            title: 'Error',
+            img: 'assets/images/fail.png',
+            message:
+                'An error occurred while reading the NFC tag. Please try again.'),
+      );
+
       Navigator.push(
-        context,
+        context.mounted ? context : context,
         MaterialPageRoute(
           builder: (context) => const SizedBox(),
         ),
@@ -91,15 +83,15 @@ class _SearchingScreenState extends State<SearchingScreen> {
             Expanded(
               child: Image.asset("assets/images/read.png"),
             ),
-            Text(
+            const Text(
               "Searching for Tags",
               style: TextStyle(
                   color: AppColors.textColor,
                   fontSize: 24.0,
                   fontWeight: FontWeight.w600),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 36.0),
+            const Padding(
+              padding: EdgeInsets.only(top: 8.0, bottom: 36.0),
               child: Text(
                 "Keep your phone close to the tag",
                 style: TextStyle(color: AppColors.textColor, fontSize: 18.0),
@@ -113,10 +105,10 @@ class _SearchingScreenState extends State<SearchingScreen> {
                       shape: WidgetStateProperty.all(RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0))),
                       padding: WidgetStateProperty.all(
-                          EdgeInsets.symmetric(vertical: 12.0)),
+                          const EdgeInsets.symmetric(vertical: 12.0)),
                       side: WidgetStateProperty.all(
-                          BorderSide(color: AppColors.textColor))),
-                  child: Text(
+                          const BorderSide(color: AppColors.textColor))),
+                  child: const Text(
                     "Cancel",
                     style:
                         TextStyle(color: AppColors.textColor, fontSize: 18.0),
