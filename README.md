@@ -12,7 +12,7 @@
 - [Features](#features)
 - [The process](#the-process)
   - [Built with](#built-with)
-  - [Installation](#installation)
+- [Installation](#installation)
   - [Useful resources](#useful-resources)
 - [API Integration](#nfc-near-field-communication)
 - [UI/UX](#uiux)
