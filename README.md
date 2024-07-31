@@ -48,7 +48,7 @@ Quick Menu is a restaurant  menu mobile app that transform the dinning experienc
 ### Screenshot
 
 ![Onbording screen](/gitfiles/screenshot3.png)
-![Enable NFC Screen](/gitfiles/screenshot2.png)
+![Enable NFC Screen](gitfiles/screenshot13.jpg)
 ![Optin Screen](/gitfiles/screenshot4.png)
 ![Error Screen](/gitfiles/screenshot5.png)
 ![Add New Prroduct Screen](/gitfiles/screenshot6.png)
@@ -56,7 +56,7 @@ Quick Menu is a restaurant  menu mobile app that transform the dinning experienc
 ![alt text](/gitfiles/screenshot8.png)
 ![alt text](/gitfiles/screenshot9.png)
 ![alt text](/gitfiles/screenshot11.png)
-![alt text](/gitfiles/screenshot12.png)
+![alt text](/gitfiles/screenshot10.png)
 
 ## Features
 
