@@ -166,12 +166,11 @@ class MenuCollection extends StatelessWidget {
                               ),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: SvgPicture.asset(
-                              'assets/svgs/edit.svg',
-                              width: 30.0,
-                              //Todo: Remove deprecated code
-                              color: AppColors.primaryColor,
-                            ),
+                            child: SvgPicture.asset('assets/svgs/edit.svg',
+                                width: 30.0,
+                                //Todo: Remove deprecated code
+                                colorFilter: const ColorFilter.mode(
+                                    AppColors.primaryColor, BlendMode.srcIn)),
                           ))
                     ],
                   ),
