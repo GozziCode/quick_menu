@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
 import 'package:quick_menu/screens/write/bloc/list/menu_bloc.dart';
-import 'package:quick_menu/screens/write/bloc/model/menu_bloc.dart';
 
 import 'constant/app_color.dart';
-import 'providers/menu_provider.dart';
 import 'screens/splash_screen.dart';
 
 void main() {
