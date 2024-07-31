@@ -131,6 +131,8 @@ class EditForm extends StatelessWidget {
               Expanded(
                 child: TextFormField(
                   controller: price,
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
                   decoration: const InputDecoration(
                       contentPadding: EdgeInsets.symmetric(horizontal: 15),
                       border: InputBorder.none),

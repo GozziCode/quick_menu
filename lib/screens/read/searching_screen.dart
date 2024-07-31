@@ -24,26 +24,7 @@ class _SearchingScreenState extends State<SearchingScreen> {
               builder: (context) => MenuScreen(menu: menuModel),
             ),
           );
-        } else {
-          // Handle the case when no valid NFC data is found
-          showDialog(
-              context: context,
-              builder: (context) => const AlertBox(
-                    title: 'Error',
-                    img: 'assets/images/fail.png',
-                    message: 'No valid menu data was found please try again.',
-                  ));
         }
-      }).catchError((error) {
-        // Handle errors and prompt the user to try again
-        showDialog(
-          context: context,
-          builder: (context) => const AlertBox(
-              title: 'Error',
-              img: 'assets/images/fail.png',
-              message:
-                  'An error occurred while reading the NFC tag. Please try again.'),
-        );
       });
     } catch (e) {
       debugPrint('Error reading NFC: $e');

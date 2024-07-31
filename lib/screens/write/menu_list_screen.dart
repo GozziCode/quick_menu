@@ -45,35 +45,45 @@ class _MenuListScreenState extends State<MenuListScreen> {
               size: 32.0,
             ),
           ),
-          body: ListView.separated(
-              scrollDirection: Axis.vertical,
-              itemBuilder: (context, index) {
-                if (index == 0) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Padding(
-                        padding:
-                            EdgeInsets.only(left: 24.0, top: 12.0, bottom: 8.0),
-                        child: Text(
-                          "Select one to write to NFC",
-                          style: TextStyle(
-                              fontSize: 20.0, color: AppColors.lightGrey),
-                        ),
-                      ),
-                      MenuCollection(initialMenu: state.menus[index])
-                    ],
-                  );
-                }
-                return MenuCollection(initialMenu: state.menus[index]);
-              },
-              separatorBuilder: (context, index) {
-                return const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12.0),
-                  child: Divider(),
-                );
-              },
-              itemCount: state.menus.length),
+          body: state.menus.isEmpty
+              ? const Center(
+                  child: Text(
+                    "No Menu created yet. \nCreate One!",
+                    textAlign: TextAlign.center,
+                    style:
+                        TextStyle(fontSize: 24.0, color: AppColors.lightGrey),
+                  ),
+                )
+              : ListView.separated(
+                  scrollDirection: Axis.vertical,
+                  itemBuilder: (context, index) {
+                    if (index == 0) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.only(
+                                left: 24.0, top: 12.0, bottom: 8.0),
+                            child: Text(
+                              "Select a menu to write to NFC",
+                              style: TextStyle(
+                                  fontSize: 20.0, color: AppColors.lightGrey),
+                            ),
+                          ),
+                          MenuCollection(initialMenu: state.menus[index])
+                        ],
+                      );
+                    }
+                    return MenuCollection(initialMenu: state.menus[index]);
+                  },
+                  separatorBuilder: (context, index) {
+                    return const Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 24, vertical: 12.0),
+                      child: Divider(),
+                    );
+                  },
+                  itemCount: state.menus.length),
         );
       },
     );
@@ -168,7 +178,6 @@ class MenuCollection extends StatelessWidget {
                             padding: const EdgeInsets.all(8.0),
                             child: SvgPicture.asset('assets/svgs/edit.svg',
                                 width: 30.0,
-                                //Todo: Remove deprecated code
                                 colorFilter: const ColorFilter.mode(
                                     AppColors.primaryColor, BlendMode.srcIn)),
                           ))

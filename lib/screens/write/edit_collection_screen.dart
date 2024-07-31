@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,7 +25,7 @@ class EditCollectionScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             state.menu.title,
-            style:  const TextStyle(fontWeight: FontWeight.w600),
+            style: const TextStyle(fontWeight: FontWeight.w600),
           ),
           backgroundColor: AppColors.white,
           surfaceTintColor: Colors.transparent,
@@ -77,24 +75,33 @@ class EditCollectionScreen extends StatelessWidget {
             size: 32.0,
           ),
         ),
-        body: ListView.separated(
-            scrollDirection: Axis.vertical,
-            itemBuilder: (context, index) {
-              String categoryName = state.menu.categories[index];
-              List<MenuModel>? categoryItems = state.menu.map[categoryName];
-              return _MenuCategory(
-                categoryList: categoryItems!,
-                category: categoryName,
-                title: state.menu.title,
-              );
-            },
-            separatorBuilder: (context, index) {
-              return const Padding(
-                padding: EdgeInsets.symmetric(vertical: 12.0, horizontal: 24),
-                child: Divider(),
-              );
-            },
-            itemCount: state.menu.categories.length),
+        body: state.menu.categories.isEmpty
+            ? const Center(
+                child: Text(
+                  "No Food created yet. \nCreate One!",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 24.0, color: AppColors.lightGrey),
+                ),
+              )
+            : ListView.separated(
+                scrollDirection: Axis.vertical,
+                itemBuilder: (context, index) {
+                  String categoryName = state.menu.categories[index];
+                  List<MenuModel>? categoryItems = state.menu.map[categoryName];
+                  return _MenuCategory(
+                    categoryList: categoryItems!,
+                    category: categoryName,
+                    title: state.menu.title,
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 12.0, horizontal: 24),
+                    child: Divider(),
+                  );
+                },
+                itemCount: state.menu.categories.length),
       );
     });
   }
@@ -183,38 +190,39 @@ class _MenuItem extends StatelessWidget {
             ),
           ),
           GestureDetector(
-              onTap: () {
-                showModalBottomSheet(
-                  backgroundColor: AppColors.bgColor,
-                  context: context,
-                  isScrollControlled: true,
-                  useSafeArea: true,
-                  builder: (BuildContext _) {
-                    return DraggableScrollableSheet(
-                      minChildSize: 0.5,
-                      maxChildSize: 0.9,
-                      initialChildSize: 0.83,
-                      snap: true,
-                      expand: false,
-                      builder: (_, controller) {
-                        return BlocProvider.value(
-                          value: BlocProvider.of<MenuModelBloc>(context),
-                          child: EditBottomSheet(
-                            menuModel: menuModel,
-                            menuTitle: title,
-                          ),
-                        );
-                      },
-                    );
-                  },
-                );
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: SvgPicture.asset(
-                  'assets/svgs/edit.svg',
-                ),
-              ),)
+            onTap: () {
+              showModalBottomSheet(
+                backgroundColor: AppColors.bgColor,
+                context: context,
+                isScrollControlled: true,
+                useSafeArea: true,
+                builder: (BuildContext _) {
+                  return DraggableScrollableSheet(
+                    minChildSize: 0.5,
+                    maxChildSize: 0.9,
+                    initialChildSize: 0.83,
+                    snap: true,
+                    expand: false,
+                    builder: (_, controller) {
+                      return BlocProvider.value(
+                        value: BlocProvider.of<MenuModelBloc>(context),
+                        child: EditBottomSheet(
+                          menuModel: menuModel,
+                          menuTitle: title,
+                        ),
+                      );
+                    },
+                  );
+                },
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: SvgPicture.asset(
+                'assets/svgs/edit.svg',
+              ),
+            ),
+          )
         ],
       );
     });

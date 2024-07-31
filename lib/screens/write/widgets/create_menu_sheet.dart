@@ -80,8 +80,8 @@ class CreateMenuBottomSheet extends StatelessWidget {
                     onTap: () {
                       if (_menuNameTextController.text != "") {
                         Menu newMenu = Menu(
-                            map: const {},
-                            categories: const [],
+                            map: {},
+                            categories: [],
                             dateTime: DateTime.now(),
                             title: _menuNameTextController.text);
                         context.read<MenuListBloc>().add(AddMenu(newMenu));

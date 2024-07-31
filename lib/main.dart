@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:quick_menu/screens/write/bloc/list/menu_bloc.dart';
 
 import 'constant/app_color.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
             title: 'Quick Menu',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
+              textTheme: GoogleFonts.interTextTheme(),
               scaffoldBackgroundColor: AppColors.bgColor,
               colorScheme:
                   ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
