@@ -42,6 +42,7 @@ Future<String> writeMenuToNfc(Menu menu) async {
       print('MenuItem written successfully to NFC tag');
       status = "MenuItem written successfully to NFC tag";
     } catch (e) {
+      status = e.toString();
       print('Error writing to NFC: $e');
     } finally {
       NfcManager.instance.stopSession();
@@ -70,13 +71,19 @@ Future<Menu?> readMenuFromNfc() async {
 
     try {
       var records = await ndef.read();
+
       for (NdefRecord record in records.records) {
         if (record.typeNameFormat == NdefTypeNameFormat.nfcWellknown) {
+          // String jsonString = String.fromCharCodes(record.payload);
+          //print(jsonString);
           String tryString = String.fromCharCodes(record.payload);
-          String jsonString = tryString.substring(tryString.indexOf("{"));
+          String jsonString = tryString.substring(tryString.indexOf('{'));
           Map<String, dynamic> json = jsonDecode(jsonString);
+          //print(json);
           Menu menu = Menu.fromJson(json);
+
           completer.complete(menu);
+
           return;
         }
       }

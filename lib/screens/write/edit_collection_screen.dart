@@ -36,7 +36,10 @@ class _EditCollectionScreenState extends State<EditCollectionScreen> {
           surfaceTintColor: Colors.transparent,
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  // context
+                  // Navigator.pop(context);
+                },
                 icon: const Icon(
                   CupertinoIcons.delete,
                 )),
