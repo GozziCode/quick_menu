@@ -43,7 +43,7 @@ Objectives: Develop your teams' NFC based idea in a full fledged application wit
 
 ## Solution
 
-Quick Menu is a resturant menu mobile app that transform the dinning experience by using NFC technology to provide customers with instant access to resturnat menus. By placing NFC tags on individual tables, users can simply tap their smartphones on the tag to view detailed and up-to-date menu information. This app enhances convienence, improves accuracy and offers a modernsolution for both customers and resturants.
+Quick Menu is a restaurant  menu mobile app that transform the dinning experience by using NFC technology to provide customers with instant access to restaurants menus. By placing NFC tags on individual tables, users can simply tap their smartphones on the tag to view detailed and up-to-date menu information. This app enhances convenience, improves accuracy and offers a modern solution for both customers and restaurants.
 
 ### Screenshot
 
@@ -55,6 +55,8 @@ Quick Menu is a resturant menu mobile app that transform the dinning experience 
 ![Write to NFC](/gitfiles/screenshot7.png)
 ![alt text](/gitfiles/screenshot8.png)
 ![alt text](/gitfiles/screenshot9.png)
+![alt text](/gitfiles/screenshot11.png)
+![alt text](/gitfiles/screenshot12.png)
 
 ## Features
 
@@ -102,7 +104,7 @@ Adopting the MVVM architecture pattern was a significant step in organizing the 
 2.**Navigate to the project directory**
 
  ```bash
-   cd malltiverse
+   cd quick_menu
    ```
 
 3.**Get the required dependencies**
@@ -132,7 +134,7 @@ Also check out these links to start your first flutter project:
 
 Quick Menu integrates with NFC, NFC (Near Field Communication) is a wireless communication technology that allows the exchange of data between devices over short distances, typically less than 10 centimeters. It operates at a frequency of 13.56 MHz and enables quick, secure transactions and data transfer.
 
-In the context of this project, NFC functionality is utilized to enhance the user experience by providing features such as reading, writing, and editing data on NFC tags. This enables users to interact with physical objects in innovative ways, such as accessing menu items in by tapping their phones on NFC-enabled tags.
+In the context of this project, NFC functionality is utilized to enhance the user experience by providing features such as reading, writing, and editing data on NFC tags. This enables users to interact with physical objects in innovative ways, such as accessing menu items of the restaurant by tapping their phones on NFC-enabled tags.
 
 ## UI/UX
 
@@ -181,22 +183,22 @@ Try Quick Menu Demo: [Google drive](https:)
 
 #### Iyamu Wisdom
 
-- Linkedin - [@wisdomiyamu](https://www.linkedin.com/in/ibrahim-sakariyah)
+- Linkedin - [@wisdomiyamu](https://www.linkedin.com/in/lukasio)
 - Email - [wisdomiyamu@gmail.com](wisdomiyamu@gmail.com)
 
-#### Sakariyah Ibrahim Temitope
+#### Sakariyah Ibrahim Temitope  
 
-- Linkedin - [@ibrahim-sakariyah](https://www.linkedin.com/in/ibrahim-sakariyah)
+- Linkedin - [@ibrahim-sakariyah](https://www.linkedin.com/in/ibrahim-sakariyah-071380183?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)
 - Email - [ibrahimsakariyah@gmail.com](ibrahimsakariyah@gmail.com)
 
 #### Ijeoma Ogbonna
 
-- Linkedin - [@ogbonnaijeoma](https://www.linkedin.com/in/ogbonnaijeoma)
+- Linkedin - [@ogbonnaijeoma](https://www.linkedin.com/in/ijeoma-emmanuella-913050242/)
 - Email - [ogbonnaijeoma871@gmail.com](ogbonnaijeoma871@gmail.com)
 
 #### Obor Spicy
 
-- Linkedin - [@israelmenyaga](https://www.linkedin.com/in/israelmenyaga)
+- Linkedin - [@israelmenyaga](https://www.linkedin.com/in/israelmenyaga?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app)
 - Email - [dev.izzy.code@gmail.com](dev.izzy.code@gmail.com)
 
 ## Contributing
