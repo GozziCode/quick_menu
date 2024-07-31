@@ -12,10 +12,17 @@ import 'package:quick_menu/screens/write/widgets/edit_bottom_sheet.dart';
 import '../../constant/app_color.dart';
 import '../../models/menu_model.dart';
 
-class EditCollectionScreen extends StatelessWidget {
+class EditCollectionScreen extends StatefulWidget {
   final Menu menu;
 
   const EditCollectionScreen({super.key, required this.menu});
+
+  @override
+  State<EditCollectionScreen> createState() => _EditCollectionScreenState();
+}
+
+class _EditCollectionScreenState extends State<EditCollectionScreen> {
+  bool deleteMode = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,43 +37,73 @@ class EditCollectionScreen extends StatelessWidget {
           backgroundColor: AppColors.white,
           surfaceTintColor: Colors.transparent,
           actions: [
-            IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.delete))
+            deleteMode
+                ? IconButton(
+                    onPressed: () {
+                      setState(() {
+                        deleteMode = false;
+                      });
+                    },
+                    icon: Icon(
+                      Icons.close_rounded,
+                      size: 32.0,
+                    ))
+                : IconButton(
+                    onPressed: () {
+                      setState(() {
+                        deleteMode = true;
+                      });
+                    },
+                    icon: Icon(
+                      CupertinoIcons.delete,
+                    )),
           ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            showModalBottomSheet(
-              backgroundColor: AppColors.bgColor,
-              context: context,
-              isScrollControlled: true,
-              useSafeArea: true,
-              builder: (BuildContext _) {
-                return DraggableScrollableSheet(
-                  minChildSize: 0.5,
-                  maxChildSize: 0.9,
-                  initialChildSize: 0.8,
-                  snap: true,
-                  expand: false,
-                  builder: (_, controller) {
-                    return BlocProvider.value(
-                      value: BlocProvider.of<MenuModelBloc>(context),
-                      child: AddBottomSheet(
-                        menuTitle: state.menu.title,
-                      ),
-                    );
-                  },
-                );
-              },
-            );
-          },
-          backgroundColor: AppColors.primaryColor,
-          shape: const OvalBorder(),
-          child: const Icon(
-            CupertinoIcons.add,
-            color: AppColors.white,
-            size: 32.0,
-          ),
-        ),
+        floatingActionButton: deleteMode
+            ? FloatingActionButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                    backgroundColor: AppColors.bgColor,
+                    context: context,
+                    isScrollControlled: true,
+                    useSafeArea: true,
+                    builder: (BuildContext _) {
+                      return DraggableScrollableSheet(
+                        minChildSize: 0.5,
+                        maxChildSize: 0.9,
+                        initialChildSize: 0.8,
+                        snap: true,
+                        expand: false,
+                        builder: (_, controller) {
+                          return BlocProvider.value(
+                            value: BlocProvider.of<MenuModelBloc>(context),
+                            child: AddBottomSheet(
+                              menuTitle: state.menu.title,
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  );
+                },
+                backgroundColor: AppColors.primaryColor,
+                shape: const OvalBorder(),
+                child: const Icon(
+                  CupertinoIcons.add,
+                  color: AppColors.white,
+                  size: 32.0,
+                ),
+              )
+            : FloatingActionButton(
+                onPressed: () {},
+                backgroundColor: AppColors.primaryColor,
+                shape: const OvalBorder(),
+                child: const Icon(
+                  CupertinoIcons.add,
+                  color: AppColors.white,
+                  size: 32.0,
+                ),
+              ),
         body: ListView.separated(
             scrollDirection: Axis.vertical,
             itemBuilder: (context, index) {

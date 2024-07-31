@@ -12,12 +12,12 @@ import '../bloc/model/menu_event.dart';
 import 'edit_form.dart';
 
 class EditBottomSheet extends StatelessWidget {
+  final MenuModel menuModel;
+  final String menuTitle;
   final TextEditingController productNameController = TextEditingController();
   final TextEditingController categoryController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController priceController = TextEditingController();
-  final MenuModel menuModel;
-  final String menuTitle;
 
   EditBottomSheet(
       {super.key, required this.menuModel, required this.menuTitle});
