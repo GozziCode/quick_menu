@@ -43,7 +43,7 @@ Objectives: Develop your teams' NFC based idea in a full fledged application wit
 
 ## Solution
 
-Quick Menu is a restaurant  menu mobile app that transform the dinning experience by using NFC technology to provide customers with instant access to restaurants menus. By placing NFC tags on individual tables, users can simply tap their smartphones on the tag to view detailed and up-to-date menu information. This app enhances convenience, improves accuracy and offers a modern solution for both customers and restaurants.
+Quick Menu is a restaurant  menu mobile app that transform the dinning experience by using NFC technology to provide customers with instant access to restaurants menus. By placing NFC tags on individual tables, users can simply tap their smartphones on the tag to view detailed and up-to-date menu information. This app enhances convenience, improves accuracy and offers a modern solution for both customers and restaurants admin.
 
 ### Screenshot
 
@@ -166,13 +166,13 @@ Code Structure:
 
 Download the latest version of the app from the link below:
 
-[Download APK](https://)
+[Download APK](https://drive.google.com/file/d/1JdwPI53pwyiyPIhmv7DT2o7JCPvVxI7w/view?usp=drive_link)
 or
-Download [here](/gitfiles/malltiverse.apk)
+Download [here](gitfiles/quick_menu.apk)
 
 ## Live Demo Link
 
-Try Quick Menu Demo: [Google drive](https:)
+Try Quick Menu Demo: [Google drive](https://drive.google.com/file/d/1Ex1-lrMT_AOyKaNm544rLn8R7SOD-Rhe/view)
 
 ## Authors
 
