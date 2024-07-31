@@ -27,7 +27,7 @@ class EditCollectionScreen extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             state.menu.title,
-            style: const const TextStyle(fontWeight: FontWeight.w600),
+            style:  const TextStyle(fontWeight: FontWeight.w600),
           ),
           backgroundColor: AppColors.white,
           surfaceTintColor: Colors.transparent,
