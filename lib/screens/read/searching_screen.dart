@@ -81,7 +81,7 @@ class _SearchingScreenState extends State<SearchingScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Image.asset("assets/images/read.png"),
+              child: Image.asset("assets/images/searching.png"),
             ),
             const Text(
               "Searching for Tags",
