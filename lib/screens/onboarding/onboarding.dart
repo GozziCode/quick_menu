@@ -1,4 +1,4 @@
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,7 +15,8 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  final CarouselController _carouselController = CarouselController();
+  final CarouselSliderController _carouselController =
+      CarouselSliderController();
   int _currentIndex = 0;
 
   final List<Map<String, String>> onboardingData = [
@@ -52,7 +53,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: Stack(
                   children: [
                     CarouselSlider.builder(
-                      carouselController: _carouselController,
+                      controller: _carouselController,
+
+                      // carouselController: _carouselController,
                       itemCount: onboardingData.length,
                       itemBuilder: (context, index, realIndex) {
                         return Column(

@@ -39,10 +39,12 @@ dependencies:
   flutter_screenutil: ^5.9.3
   google_fonts: ^6.2.1
   app_settings: ^5.1.1
-  carousel_slider: ^4.2.1
+  
   flutter_svg: ^2.0.10+1
   flutter_bloc: ^8.1.6
   equatable: ^2.0.5
+  carousel_slider_plus: ^7.1.1
+
 
 dev_dependencies:
   flutter_test:
